@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin
+		xmlns="http://cordova.apache.org/ns/plugins/1.0"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		id="cordova-nsr-plugin"
+		version="1.0.0">
+
+    <name>Neosurance</name>
+
+    <license>Apache 2.0</license>
+    
+    <description>Use Neosurance SDK</description>
+
+    <author>Alessandro Infurna</author>
+
+    <license>Apache 2.0</license>
+
+    <keywords>Neosurance, Android, Insurance, Digital, NSR</keywords>
+
+    <repo>https://github.com/neosurance/NeosuranceSDK_v3.android.git</repo>
+	
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    
+    <platform name="android">
+
+        <js-module src="www/nsr.js" name="Neosurance">
+            <clobbers target="Neosurance" />
+        </js-module>
+
+		<edit-config file="AndroidManifest.xml" target="/manifest/uses-sdk" mode="merge">
+			<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="27" />
+		</edit-config>
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="Neosurance">
+				<param name="android-package" value="eu.neosurance.cordova.NSRCordovaInterface" />
+				<param name="onload" value="true"/>
+			</feature>
+		</config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.CAMERA" />
+			<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+			<uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+
+		</config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<receiver android:name="eu.neosurance.sdk.NSRBootReceiver">
+				<intent-filter>
+					<action android:name="android.intent.action.BOOT_COMPLETED" />
+				</intent-filter>
+			</receiver>
+			<receiver android:name="eu.neosurance.sdk.NSRFenceCallback" />
+			<receiver android:name="eu.neosurance.sdk.NSRActivityCallback" />
+			<receiver android:name="eu.neosurance.sdk.NSRDelayedPush" />
+			<receiver android:name="eu.neosurance.sdk.NSRBackground" />
+
+			<service android:name="eu.neosurance.sdk.NSRForeground" android:exported="false" />
+
+			<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.provider" android:exported="false" android:grantUriPermissions="true">
+				<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
+			</provider>
+
+			<activity
+					android:name="eu.neosurance.demo.MainActivity"
+					android:configChanges="orientation|screenSize|keyboardHidden"
+					android:screenOrientation="portrait"
+					android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+				<intent-filter>
+					<action android:name="android.intent.action.MAIN" />
+					<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+			</activity>
+			<activity
+					android:name="eu.neosurance.sdk.NSRActivityWebView"
+					android:configChanges="orientation|screenSize|keyboardHidden"
+					android:screenOrientation="portrait"
+					android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+			
+        </config-file>
+
+		<source-file src="src/android/cordova/NSRCordovaInterface.java" target-dir="src/eu/neosurance/cordova" />
+
+		<source-file src="src/android/demo/MainActivity.java" target-dir="src/eu/neosurance/demo" />
+		<source-file src="src/android/demo/WFDelegate.java" target-dir="src/eu/neosurance/demo" />
+		<source-file src="src/android/demo/WFReceiver.java" target-dir="src/eu/neosurance/demo" />
+
+		<source-file src="src/android/sdk/NSR.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRAction.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRActivityCallback.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRActivityWebView.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRAuth.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRBackground.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRBootReceiver.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRConnection.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRDefaultSecurity.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRDelayedPush.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSREvent.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSREventWebView.java" target-dir="src/eu/neosurance/sdk" />
+
+		<source-file src="src/android/sdk/NSRFenceCallback.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRFences.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRForeground.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRHttpRunner.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRLocationCallback.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRLog.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRPower.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRPush.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRPushDelegate.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRSecurityDelegate.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRSecurityResponse.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRSettings.java" target-dir="src/eu/neosurance/sdk" />
+
+		<source-file src="src/android/sdk/NSRTrace.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRUser.java" target-dir="src/eu/neosurance/sdk" />
+		<source-file src="src/android/sdk/NSRWorkflowDelegate.java" target-dir="src/eu/neosurance/sdk" />
+
+		<source-file src="src/android/utils/NSRJsonAdapter.java" target-dir="src/eu/neosurance/utils" />
+		<source-file src="src/android/utils/NSRShake.java" target-dir="src/eu/neosurance/utils" />
+		<source-file src="src/android/utils/NSRUtils.java" target-dir="src/eu/neosurance/utils" />
+		<source-file src="src/android/utils/PackageChangeReceiver.java" target-dir="src/eu/neosurance/utils" />
+
+
+		<source-file src="assets/app.html" target-dir="assets" />
+		<source-file src="assets/index.html" target-dir="assets" />
+		<source-file src="assets/style.css" target-dir="assets" />
+		<source-file src="assets/user.svg" target-dir="assets" />
+		<source-file src="assets/script.js" target-dir="assets" />
+
+		<source-file src="assets/config.properties" target-dir="assets" />
+		<source-file src="assets/eventCruncher.html" target-dir="assets" />
+
+		<source-file src="assets/res/cf.js" target-dir="assets/res" />
+		<source-file src="assets/res/es100.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es100x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es200.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es200x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es300.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es300x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es400.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es400x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es500.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es500x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es600.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es600x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es700.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es700x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es800.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es800x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es900.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/es900x.woff2" target-dir="assets/res" />
+		<source-file src="assets/res/fonts.css" target-dir="assets/res" />
+		<source-file src="assets/res/style.css" target-dir="assets/res" />
+		<source-file src="assets/res/T.js" target-dir="assets/res" />
+
+		<source-file src="drawable/nsr_logo.png" target-dir="res/drawable" />
+		<source-file src="raw/push.wav" target-dir="res/raw" />
+		<source-file src="xml/file_paths.xml" target-dir="res/xml" />
+
+    </platform>
+</plugin>

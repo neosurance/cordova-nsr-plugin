@@ -1,0 +1,32 @@
+{
+  "name": "cordova-nsr-plugin",
+  "version": "3.0.0",
+  "description": "NSR Cordova interface",
+  "cordova": {
+    "id": "cordova-nsr-plugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neosurance/NeosuranceSDK_v3.android.git"
+  },
+  "keywords": [
+    "Neosurance",
+    "Android",
+    "Insurance",
+    "Digital",
+    "NSR",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Alessandro Infurna",
+  "license": "Apache 2.0"
+}
