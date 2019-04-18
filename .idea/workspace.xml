@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d8d1971-1a6a-40a4-ba92-6238d93f93ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/eventCruncher.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/eventCruncher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/demo/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/sdk_ext/NSRActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/demo/WFDelegate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/sdk_ext/WFDelegate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/demo/WFReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/sdk_ext/WFReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/sdk/NSREventWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/sdk/NSREventWebView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/sdk/NSRForeground.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/sdk/NSRForeground.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/utils/NSRUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/utils/NSRUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/nsr.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/nsr.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -103,8 +91,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="406">
-                <caret line="192" column="12" lean-forward="true" selection-start-line="192" selection-start-column="12" selection-end-line="192" selection-end-column="12" />
+              <first_editor relative-caret-position="240">
+                <caret line="16" column="214" selection-start-line="16" selection-start-column="214" selection-end-line="16" selection-end-column="214" />
               </first_editor>
               <second_editor />
             </state>
@@ -304,12 +292,12 @@
       <workItem from="1554194760911" duration="559000" />
       <workItem from="1554366446517" duration="1256000" />
       <workItem from="1554472417530" duration="61004000" />
-      <workItem from="1555483986908" duration="26147000" />
+      <workItem from="1555483986908" duration="26289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98886000" />
+    <option name="totallyTimeSpent" value="99028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="23" width="1598" height="952" extended-state="0" />
@@ -644,8 +632,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="406">
-            <caret line="192" column="12" lean-forward="true" selection-start-line="192" selection-start-column="12" selection-end-line="192" selection-end-column="12" />
+          <first_editor relative-caret-position="240">
+            <caret line="16" column="214" selection-start-line="16" selection-start-column="214" selection-end-line="16" selection-end-column="214" />
           </first_editor>
           <second_editor />
         </state>
