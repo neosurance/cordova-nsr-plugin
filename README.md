@@ -1,11 +1,8 @@
 
 <p align="center">
-    <img src="http://res.cloudinary.com/hrscywv4p/image/upload/c_limit,fl_lossy,h_100,w_100,f_auto,q_auto/v1/286367/Logo_2_fq61f2.png">
-</p>
-<p align="left">
+    <img src="http://res.cloudinary.com/hrscywv4p/image/upload/c_limit,fl_lossy,h_30,w_30,f_auto,q_auto/v1/286367/Logo_2_fq61f2.png">
     <b><a href="https://github.com/neosurance/cordova-nsr-plugin.git">NEOSURANCE Ionic Cordova Plugin</a></b>
 </p>
-
 
 <br>
 
