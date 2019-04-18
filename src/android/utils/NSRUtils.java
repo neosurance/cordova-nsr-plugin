@@ -141,7 +141,9 @@ public class NSRUtils {
 
     public static String getLang(Context ctx) {
         try {
-            return getSettings(ctx).has("ns_lang") ? getSettings(ctx).getString("ns_lang") : null;
+            if(ctx != null)
+                return getSettings(ctx).has("ns_lang") ? getSettings(ctx).getString("ns_lang") : null;
+            else return null;
         } catch (Exception e) {
             NSRLog.e("getLang", e);
             return null;

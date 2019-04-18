@@ -29,13 +29,13 @@ public class NSRForeground extends Service {
 			NotificationCompat.Builder notification = new NotificationCompat.Builder(this, SILENT_ID);
 			notification.setSound(null);
 			try {
-				notification.setSmallIcon(NSRUtils.getSettings(eu.neosurance.demo.MainActivity.demoContext).getInt("push_icon"));
+				notification.setSmallIcon(NSRUtils.getSettings(eu.neosurance.sdk_ext.NSRActivity.demoContext).getInt("push_icon"));
 			} catch (Exception e) {
 				notification.setSmallIcon(R.drawable.nsr_logo);
 			}
 			try {
 
-				String foregroundPushText = NSRUtils.getConf(eu.neosurance.demo.MainActivity.demoContext).getString("foreground_push");
+				String foregroundPushText = NSRUtils.getConf(eu.neosurance.sdk_ext.NSRActivity.demoContext).getString("foreground_push");
 				if (foregroundPushText != null) {
 					NSRLog.d("NSRForeground text: " + foregroundPushText);
 					notification.setContentText(foregroundPushText);

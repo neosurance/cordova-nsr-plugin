@@ -25,9 +25,21 @@
     
     <platform name="android">
 
-        <js-module src="www/nsr.js" name="Neosurance">
-            <clobbers target="Neosurance" />
-        </js-module>
+		<js-module src="www/script.js" name="scriptJS">
+			<clobbers target="scriptJS" />
+		</js-module>
+
+		<js-module src="www/nsr_event_cruncher.js" name="nsr_event_cruncher">
+			<clobbers target="nsr_event_cruncher" />
+		</js-module>
+
+		<js-module src="www/wf_delegate.js" name="WF_Delegate">
+			<clobbers target="WF_Delegate" />
+		</js-module>
+
+		<js-module src="www/nsr.js" name="Neosurance">
+			<clobbers target="Neosurance" />
+		</js-module>
 
 		<edit-config file="AndroidManifest.xml" target="/manifest/uses-sdk" mode="merge">
 			<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="27" />
@@ -72,7 +84,7 @@
 			</provider>
 
 			<activity
-					android:name="eu.neosurance.demo.MainActivity"
+					android:name="eu.neosurance.sdk_ext.NSRActivity"
 					android:configChanges="orientation|screenSize|keyboardHidden"
 					android:screenOrientation="portrait"
 					android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -91,9 +103,9 @@
 
 		<source-file src="src/android/cordova/NSRCordovaInterface.java" target-dir="src/eu/neosurance/cordova" />
 
-		<source-file src="src/android/demo/MainActivity.java" target-dir="src/eu/neosurance/demo" />
-		<source-file src="src/android/demo/WFDelegate.java" target-dir="src/eu/neosurance/demo" />
-		<source-file src="src/android/demo/WFReceiver.java" target-dir="src/eu/neosurance/demo" />
+		<source-file src="src/android/sdk_ext/NSRActivity.java" target-dir="src/eu/neosurance/sdk_ext" />
+		<source-file src="src/android/sdk_ext/WFDelegate.java" target-dir="src/eu/neosurance/sdk_ext" />
+		<source-file src="src/android/sdk_ext/WFReceiver.java" target-dir="src/eu/neosurance/sdk_ext" />
 
 		<source-file src="src/android/sdk/NSR.java" target-dir="src/eu/neosurance/sdk" />
 		<source-file src="src/android/sdk/NSRAction.java" target-dir="src/eu/neosurance/sdk" />

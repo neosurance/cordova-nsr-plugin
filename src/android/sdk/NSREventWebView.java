@@ -49,11 +49,11 @@ public class NSREventWebView {
 	}
 
 	public void synch() {
-		eval("EVC.synch()");
+		eval("nsr_event_cruncher.EVC.synch()");
 	}
 
 	public void reset() {
-		eval("localStorage.clear();EVC.synch()");
+		eval("localStorage.clear();nsr_event_cruncher.EVC.synch()");
 	}
 
 	protected void crunchEvent(final String event, final JSONObject payload) {
@@ -61,7 +61,7 @@ public class NSREventWebView {
 			JSONObject nsrEvent = new JSONObject();
 			nsrEvent.put("event", event);
 			nsrEvent.put("payload", payload);
-			eval("EVC.innerCrunchEvent(" + nsrEvent.toString() + ")");
+			eval("nsr_event_cruncher.EVC.innerCrunchEvent(" + nsrEvent.toString() + ")");
 		} catch (JSONException e) {
 			NSRLog.e("crunchEvent", e);
 		}

@@ -1,4 +1,4 @@
-package eu.neosurance.demo;
+package eu.neosurance.sdk_ext;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,8 +26,8 @@ import eu.neosurance.sdk.NSRSettings;
 import eu.neosurance.sdk.NSRUser;
 
 
-public class MainActivity extends CordovaActivity {
-	public final static String TAG = "DEMO_";
+public class NSRActivity extends CordovaActivity {
+	public final static String TAG = "sdk_ext_";
 	private WebView mainView;
 	private BroadcastReceiver wfReceiver;
 	private Properties config;
@@ -42,7 +42,7 @@ public class MainActivity extends CordovaActivity {
 		try {
 			config.load(this.getAssets().open("config.properties"));
 
-			Log.d(TAG, "MainActivity onCreate");
+			Log.d(TAG, "NsrActivity onCreate");
 			super.onCreate(savedInstanceState);
 
 			this.demoContext = getApplicationContext();
@@ -186,7 +186,7 @@ public class MainActivity extends CordovaActivity {
 
 	@Override
 	public void onDestroy() {
-		Log.d(TAG, "MainActivity onDestroy");
+		Log.d(TAG, "NsrActivity onDestroy");
 		ready = false;
 		new Handler(Looper.getMainLooper()).post(new Runnable() {
 			public void run() {
@@ -207,26 +207,26 @@ public class MainActivity extends CordovaActivity {
 
 	@Override
 	protected void onStart() {
-		Log.d(TAG, "MainActivity onStart");
+		Log.d(TAG, "NsrActivity onStart");
 		super.onStart();
 	}
 
 	@Override
 	protected void onRestart() {
-		Log.d(TAG, "MainActivity onRestart");
+		Log.d(TAG, "NsrActivity onRestart");
 		super.onRestart();
 	}
 
 	@Override
 	protected void onPause() {
-		Log.d(TAG, "MainActivity onPause");
+		Log.d(TAG, "NsrActivity onPause");
 		super.onPause();
 	}
 
 
 	@Override
 	protected void onResume() {
-		Log.d(TAG, "MainActivity onResume");
+		Log.d(TAG, "NsrActivity onResume");
 		super.onResume();
 
 		//NSR.NSROnResume();
@@ -234,7 +234,7 @@ public class MainActivity extends CordovaActivity {
 
 	@Override
 	protected void onStop() {
-		Log.d(TAG, "MainActivity onStop");
+		Log.d(TAG, "NsrActivity onStop");
 
 		//NSR.NSROnStop();
 

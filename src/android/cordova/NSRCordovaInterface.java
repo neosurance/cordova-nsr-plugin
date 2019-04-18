@@ -26,12 +26,14 @@ import android.support.v4.content.LocalBroadcastManager;
 import java.io.IOException;
 import java.util.Properties;
 
-import eu.neosurance.demo.MainActivity;
-import eu.neosurance.demo.WFDelegate;
-import eu.neosurance.demo.WFReceiver;
+import eu.neosurance.sdk.NSREventWebView;
+import eu.neosurance.sdk_ext.NSRActivity;
+import eu.neosurance.sdk_ext.WFDelegate;
+import eu.neosurance.sdk_ext.WFReceiver;
 import eu.neosurance.sdk.NSR;
 import eu.neosurance.sdk.NSRSettings;
 import eu.neosurance.sdk.NSRUser;
+import eu.neosurance.utils.NSRUtils;
 
 public class NSRCordovaInterface extends CordovaPlugin {
 
@@ -51,6 +53,7 @@ public class NSRCordovaInterface extends CordovaPlugin {
     //public static String ACTION_ONSENTDATA = "onSentData";
     //public static CallbackContext onSendCallback;
 
+    public static CallbackContext NSR_StartSDKActivityCallback = null;
     public static CallbackContext NSR_InitCallback = null;
 
     public static CallbackContext NSR_SetupCallback = null;
@@ -137,27 +140,23 @@ public class NSRCordovaInterface extends CordovaPlugin {
         return true;
     }
 
-    //startSDKMainActivity
+    //startSDKActivity
     public void startSDKMainActivity(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
 
         Log.d(TAG, ">>> startSDKMainActivity");
 
-        NSR_InitCallback = callbackContext;
+        NSR_StartSDKActivityCallback = callbackContext;
 
         try {
 
-            JSONObject r = args.getJSONObject(0);
-            try {
-
-                r.put("message", "start_sdk");
-                startSDKMainActivityHandler(r);
-
-            } catch (JSONException e) {
-                NSR_SetupCallback.error(e.getMessage());
-            }
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "start_sdk");
+            startSDKMainActivityHandler(r);
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d(TAG,e.getMessage());
+            NSR_StartSDKActivityCallback.error(e.getMessage());
         }
 
     }
@@ -169,14 +168,17 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
         NSR_InitCallback = callbackContext;
 
-        JSONObject r;
+
         try {
-            r = args.getJSONObject(0);
+
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
             r.put("message", "init_nsr");
             setupHandler(r);
 
         } catch (JSONException e) {
-            NSR_SetupCallback.error(e.getMessage());
+            Log.d(TAG,e.getMessage());
+            NSR_InitCallback.error(e.getMessage());
         }
 
 
@@ -184,41 +186,40 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
     //NSR_Setup
     private void NSR_Setup(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "NSR_Setup");
-
-        NSR_SetupCallback = callbackContext;
 
         Log.d(TAG,"NSR_SETUP - NSRCordovaInterface.java - received: 'nsr_setup' <<<");
 
-        JSONObject r = args.getJSONObject(0);//new JSONObject();
-            try {
+        NSR_SetupCallback = callbackContext;
 
-                r.put("message", "NSR_Setup OK!");
-                setupHandler(r);
+        try {
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "NSR_Setup OK!");
+            setupHandler(r);
 
-            } catch (JSONException e) {
-                NSR_SetupCallback.error(e.getMessage());
+        } catch (JSONException e) {
+            Log.d(TAG,e.getMessage());
+            NSR_SetupCallback.error(e.getMessage());
         }
 
     }
 
     //NSR_RegisterUser
     private void NSR_RegisterUser(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "NSR_RegisterUser");
-
-        NSR_RegisterUserCallback = callbackContext;
 
         Log.d(TAG,"NSR_RegisterUser - NSRCordovaInterface.java - received: 'nsr_register_user' <<<");
 
-        JSONObject r = args.getJSONObject(0);//new JSONObject();
+        NSR_RegisterUserCallback = callbackContext;
 
-            try {
+        try {
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "NSR_RegisterUser OK!");
+            registerUserHandler(r);
 
-                r.put("message", "NSR_RegisterUser OK!");
-                registerUserHandler(r);
-
-            } catch (JSONException e) {
-                NSR_RegisterUserCallback.error(e.getMessage());
+        } catch (JSONException e) {
+            Log.d(TAG,e.getMessage());
+            NSR_RegisterUserCallback.error(e.getMessage());
         }
 
     }
@@ -226,105 +227,105 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
     //NSR_AppLogin
     private void NSR_AppLogin(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "NSR_AppLogin");
-
-        NSR_AppLoginCallback = callbackContext;
 
         Log.d(TAG,"NSR_AppLogin - NSRCordovaInterface.java - received: 'nsr_app_login' <<<");
 
-        JSONObject r = args.getJSONObject(0);//new JSONObject();
+        NSR_AppLoginCallback = callbackContext;
 
-            try {
+        try {
 
-                r.put("message", "NSR_AppLogin OK!");
-                appLoginHandler(r);
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "NSR_AppLogin OK!");
+            appLoginHandler(r);
 
-            } catch (JSONException e) {
-                NSR_AppLoginCallback.error(e.getMessage());
+        } catch (JSONException e) {
+            Log.d(TAG,e.getMessage());
+            NSR_AppLoginCallback.error(e.getMessage());
         }
 
     }
 
     //NSR_AppPayment
     private void NSR_AppPayment(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "appPayment");
-
-        NSR_AppPaymentCallback = callbackContext;
 
         Log.d(TAG,"NSR_AppPayment - NSRCordovaInterface.java - received: nsr_app_payment <<<");
 
-        JSONObject r = args.getJSONObject(0);//new JSONObject();
+        NSR_AppPaymentCallback = callbackContext;
 
-            try {
+        try {
 
-                r.put("message", "NSR_AppPayment OK!");
-                appPaymentHandler(r);
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "NSR_AppPayment OK!");
+            appPaymentHandler(r);
 
-            } catch (JSONException e) {
-                NSR_AppPaymentCallback.error(e.getMessage());
+        } catch (JSONException e) {
+            Log.d(TAG,e.getMessage());
+            NSR_AppPaymentCallback.error(e.getMessage());
         }
 
     }
 
     //NSR_SendEvent
     private void NSR_SendEvent(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "NSR_SendEvent");
-
-        NSR_SendEventCallback = callbackContext;
 
         Log.d(TAG,"NSR_SendEvent - NSRCordovaInterface.java - received: nsr_send_event <<<");
 
-        JSONObject r = args.getJSONObject(0);//new JSONObject();
+        NSR_SendEventCallback = callbackContext;
 
-            try {
+        try {
 
-                r.put("message", "NSR_SendEvent OK!");
-                sendEventHandler(r);
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "NSR_SendEvent OK!");
+            sendEventHandler(r);
 
-            } catch (JSONException e) {
-                NSR_SendEventCallback.error(e.getMessage());
+        } catch (JSONException e) {
+            Log.d(TAG,e.getMessage());
+            NSR_SendEventCallback.error(e.getMessage());
         }
 
     }
 
     //NSR_SendAction
     private void NSR_SendAction(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "NSR_SendAction");
-
-        NSR_SendActionCallback = callbackContext;
 
         Log.d(TAG,"NSR_SendAction - NSRCordovaInterface.java - received: nsr_send_action <<<");
 
-        JSONObject r = args.getJSONObject(0);//new JSONObject();
+        NSR_SendActionCallback = callbackContext;
 
-            try {
+        try {
 
-                r.put("message", "NSR_SendEvent OK!");
-                sendActionHandler(r);
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "NSR_SendAction OK!");
+            sendActionHandler(r);
 
-            } catch (JSONException e) {
-                NSR_SendActionCallback.error(e.getMessage());
+        } catch (JSONException e) {
+            Log.d(TAG,e.getMessage());
+            NSR_SendActionCallback.error(e.getMessage());
         }
 
     }
 
     //NSR_PostMessage
     private void NSR_PostMessage(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-        Log.d(TAG, "NSR_PostMessage");
-
-        NSR_PostMessageCallback = callbackContext;
 
         Log.d(TAG,"NSR_PostMessage - NSRCordovaInterface.java - received: nsr_post_message <<<");
 
-        JSONObject r = args.getJSONObject(0);//new JSONObject();
+        NSR_PostMessageCallback = callbackContext;
 
-            try {
+        try {
 
-                r.put("message", "nsr_post_message");
-                sendPostMessageHandler(r);
+            String str = args.get(0).toString();
+            JSONObject r = new JSONObject(str);
+            r.put("message", "nsr_post_message");
+            sendPostMessageHandler(r);
 
-            } catch (JSONException e) {
-                NSR_PostMessageCallback.error(e.getMessage());
+        } catch (JSONException e) {
+            Log.d(TAG,e.getMessage());
+            NSR_PostMessageCallback.error(e.getMessage());
         }
 
     }
@@ -340,7 +341,7 @@ public class NSRCordovaInterface extends CordovaPlugin {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             public void run() {
                 try {
-                    Intent intent = new Intent(ctx, eu.neosurance.demo.MainActivity.class);
+                    Intent intent = new Intent(ctx, eu.neosurance.sdk_ext.NSRActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     ctx.startActivity(intent);
                 } catch (Throwable e) {
@@ -371,8 +372,10 @@ public class NSRCordovaInterface extends CordovaPlugin {
         settings.setWorkflowDelegate(new WFDelegate(),ctx);
         NSR.getInstance(ctx).askPermissions(act);
 
-        wfReceiver = new WFReceiver(new MainActivity());
+        wfReceiver = new WFReceiver(new NSRActivity());
         LocalBroadcastManager.getInstance(ctx).registerReceiver(wfReceiver, new IntentFilter("WFStuff"));
+
+        NSRUtils.synchEventWebView(ctx);
 
         if(NSR_SetupCallback != null)
             NSR_SetupCallback.success(data);
@@ -393,11 +396,47 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
     public void appLoginHandler(JSONObject data) throws JSONException {
         Log.d(TAG, "appLoginHandler");
+
+        String url = data.getString("url");
+        WFDelegate wfTmp = new WFDelegate();
+        wfTmp.setData(ctx, "login_url", url);
+
+
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                wfTmp.executeLogin(ctx, url);
+            }
+        }, 500);
+
+        //Intent intent = new Intent("WFStuff");
+        //intent.putExtra("message", "showLogin()");
+        //LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent);
+
         NSR_AppLoginCallback.success(data);
     }
 
     public void appPaymentHandler(JSONObject data) throws JSONException {
         Log.d(TAG, "appPaymentHandler");
+
+        String url = data.getString("url");
+        WFDelegate wfTmp = new WFDelegate();
+
+        wfTmp.setData(ctx, "payment_url", url);
+
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                try {
+                    wfTmp.executePayment(ctx, data.getJSONObject("payment"), url);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 500);
+
+        //Intent intent = new Intent("WFStuff");
+        //intent.putExtra("message", "showPay()");
+        //LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent);
+
         NSR_AppPaymentCallback.success(data);
     }
 
@@ -416,10 +455,19 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
         if(data.has("event") && data.has("payload")){
             NSR instance = NSR.getInstance(ctx);
+
+            if(NSR.eventWebView == null)
+                NSR.eventWebView = new NSREventWebView(ctx, instance);
+
             instance.sendEvent(data.getString("event"), data.getJSONObject("payload"));
             NSR_PostMessageCallback.success(data);
         }else{
-            NSR_PostMessageCallback.error("no event");
+
+            if(NSR.eventWebView == null)
+                NSR.eventWebView = new NSREventWebView(ctx, NSR.getInstance(ctx));
+
+            NSR.eventWebView.postMessage(data.toString());
+            NSR_PostMessageCallback.success("apiCall");
         }
     }
 

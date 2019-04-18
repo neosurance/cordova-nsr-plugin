@@ -3,7 +3,6 @@ var exec = cordova.require('cordova/exec');
 var	service = "Neosurance";
 var ready = false;
 
-
 var Neosurance = {
 
 	//***** CordovaWebView <-- Native Android App
@@ -50,8 +49,8 @@ var Neosurance = {
 	//NSR_Setup
 	NSR_Setup: function (obj, win, fail) {
 
-
-		//obj = {"int": 1, "message": "nsr_setup"}
+			if(typeof obj == "undefined" || obj == null)
+				obj = {"int": 1, "message": "nsr_setup"};
 
 
 			if (typeof win == "undefined" || win == null)
@@ -68,7 +67,7 @@ var Neosurance = {
 
 
 			//exec(function(winParam) {}, function(error) {}, "service","action", ["firstArgument", "secondArgument", 42, false]);
-			exec(win, fail, service, "nsr_setup", [obj]);
+			exec(win, fail, service, "nsr_setup", [obj]); //start_sdk_main_activity
 
 
 
@@ -205,8 +204,6 @@ var Neosurance = {
 	//NSR_PostMessage
 	NSR_PostMessage: function (obj, win, fail) {
 
-
-
 			ready = true;
 
 			if (typeof win == "undefined" || win == null)
@@ -222,8 +219,6 @@ var Neosurance = {
 				};
 
 			exec(win, fail, service, "nsr_post_message", [obj]);
-
-
 
 	},
 

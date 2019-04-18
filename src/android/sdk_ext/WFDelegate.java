@@ -1,4 +1,4 @@
-package eu.neosurance.demo;
+package eu.neosurance.sdk_ext;
 
 import android.app.Application;
 import android.content.Context;
@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 import eu.neosurance.sdk.NSRWorkflowDelegate;
 
-import static eu.neosurance.demo.MainActivity.TAG;
+import static eu.neosurance.sdk_ext.NSRActivity.TAG;
 
 
 public class WFDelegate implements NSRWorkflowDelegate {
@@ -21,14 +21,14 @@ public class WFDelegate implements NSRWorkflowDelegate {
 	@Override
 	public boolean executeLogin(final Context ctx, final String url) {
 		Log.d(TAG, "executeLogin");
-		Log.d(TAG, "MainActivity: " + eu.neosurance.demo.MainActivity.created + " " + eu.neosurance.demo.MainActivity.ready);
+		Log.d(TAG, "MainActivity: " + eu.neosurance.sdk_ext.NSRActivity.created + " " + eu.neosurance.sdk_ext.NSRActivity.ready);
 
 		setData(ctx, "login_url", url);
 
-		if (!eu.neosurance.demo.MainActivity.ready) {
-			Log.d(TAG, "eu.neosurance.demo.MainActivity not ready");
-			if (!eu.neosurance.demo.MainActivity.created) {
-				Log.d(TAG, "eu.neosurance.demo.MainActivity launching");
+		if (!eu.neosurance.sdk_ext.NSRActivity.ready) {
+			Log.d(TAG, "eu.neosurance.sdk_ext.NSRActivity not ready");
+			if (!eu.neosurance.sdk_ext.NSRActivity.created) {
+				Log.d(TAG, "eu.neosurance.sdk_ext.NSRActivity launching");
 				launchMainActivity(ctx);
 			}
 			new Handler().postDelayed(new Runnable() {
@@ -37,7 +37,7 @@ public class WFDelegate implements NSRWorkflowDelegate {
 				}
 			}, 500);
 		} else {
-			Log.d(TAG, "eu.neosurance.demo.MainActivity ready");
+			Log.d(TAG, "eu.neosurance.sdk_ext.NSRActivity ready");
 			Intent intent = new Intent("WFStuff");
 			intent.putExtra("message", "showLogin()");
 			LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent);
@@ -48,12 +48,12 @@ public class WFDelegate implements NSRWorkflowDelegate {
 	@Override
 	public JSONObject executePayment(final Context ctx, final JSONObject payment, final String url) {
 		Log.d(TAG, "executePayment");
-		Log.d(TAG, "eu.neosurance.demo.MainActivity: " + eu.neosurance.demo.MainActivity.created + " " + eu.neosurance.demo.MainActivity.ready);
+		Log.d(TAG, "eu.neosurance.sdk_ext.NSRActivity: " + eu.neosurance.sdk_ext.NSRActivity.created + " " + eu.neosurance.sdk_ext.NSRActivity.ready);
 
 		setData(ctx, "payment_url", url);
-		if (!eu.neosurance.demo.MainActivity.ready) {
-			Log.d(TAG, "eu.neosurance.demo.MainActivity not ready");
-			if (!eu.neosurance.demo.MainActivity.created) {
+		if (!eu.neosurance.sdk_ext.NSRActivity.ready) {
+			Log.d(TAG, "eu.neosurance.sdk_ext.NSRActivity not ready");
+			if (!eu.neosurance.sdk_ext.NSRActivity.created) {
 				launchMainActivity(ctx);
 			}
 			new Handler().postDelayed(new Runnable() {
@@ -96,7 +96,7 @@ public class WFDelegate implements NSRWorkflowDelegate {
 	}
 
 	private void launchMainActivity(final Context ctx) {
-		Intent intent = new Intent(ctx, eu.neosurance.demo.MainActivity.class);
+		Intent intent = new Intent(ctx, eu.neosurance.sdk_ext.NSRActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		ctx.startActivity(intent);
 	}

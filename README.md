@@ -1,84 +1,276 @@
-/*
-Written by Alessandro Infurna
-*/
 
-# Cordova NSR Plugin
+<p align="center">
+    <img src="http://res.cloudinary.com/hrscywv4p/image/upload/c_limit,fl_lossy,h_100,w_100,f_auto,q_auto/v1/286367/Logo_2_fq61f2.png">
+</p>
+<p align="left">
+    <b><a href="https://github.com/neosurance/cordova-nsr-plugin.git">NEOSURANCE Ionic Cordova Plugin</a></b>
+</p>
 
-The plugin has functions that allows your app to have bidirectional communication with Samsung Gear 3 Series Tizen  applications and Cordova applications.
+
+<br>
+
+> With Neosurance, Insurers and Communities can offer the right insurance at the right time, creating great customer experiences that drive the adoption of mobile insurance and close the protection gap.
+
+<br>
+
+<img width="60%" align="right" hspace="19" vspace="12" src="https://storage.googleapis.com/material-design/publish/material_v_12/assets/0BwJzNNZmsTcKZy1YYTV3VWQzVUE/notifications-behavior-03-drawer.png"></img>
+<img width="60%" align="right" hspace="19" vspace="12" src="https://storage.googleapis.com/material-design/publish/material_v_12/assets/0Bzhp5Z4wHba3S1JWc3NkTVpjVk0/notifications-guidelines-03-optin.png"></img>
+
+### Supported platforms
+
+- Android 4.4+
+- iOS 10+
+
+## Basics
+
+The plugin creates the object `Neosurance` and is accessible after *deviceready* has been fired.
+
+```js
+Neosurance.NSR_Setup()
+```
+
+The plugin allows hybrid cordova applications to use Neosurance SDK.
+
+```js
+Neosurance.NSR_RegisterUser({
+    email: "mario.rossi@neosurance.eu",
+    firstname: "Mario",
+    lastname: "Rossi",
+    fiscalCode: "MRXRSS92T01D850W",
+    address: "Via Canova 12",
+    city: "Milano",
+    stateProvince: "MI"
+})
+```
+
+## NSREventCruncher
+
+A notification will be detected by the NSR Event Cruncher:
+
+```js
+nsr_event_cruncher.EVC.init()
+```
 
 ## Installation
-With Cordova CLI, from npm:
 
-$ cordova plugin add https://ale_infu@bitbucket.org/ale_infu/aleinfugear.git
-$ phonegap plugin add https://ale_infu@bitbucket.org/ale_infu/aleinfugear.git
+The plugin can be installed via [Cordova-CLI][CLI] and is publicly available on github.
+
+Execute from the projects root folder:
+
+    $ cordova plugin add https://github.com/neosurance/cordova-nsr-plugin.git
+
+Or install from local source:
+
+    $ cordova plugin add <path> 
+
+
+## After Installation
+
+1. Inside your **AndroidManifest.xml** be sure to have the following permissions:
+
+	```xml
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+	```
+2. Inside your **AndroidManifest.xml** be sure to have the following activities:
+
+	```xml
+	<activity android:configChanges="orientation|screenSize|keyboardHidden" 
+              android:name="eu.neosurance.sdk_ext.NSRActivity" 
+              android:screenOrientation="portrait" 
+              android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+         <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>
+    </activity>
+   
+    <activity android:configChanges="orientation|screenSize|keyboardHidden" 
+              android:name="eu.neosurance.sdk.NSRActivityWebView" 
+              android:screenOrientation="portrait" 
+              android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+	```
+
+3. Inside your **AndroidManifest.xml** be sure to have the following receivers:
+   
+    ```xml
+   	<receiver android:name="eu.neosurance.sdk.NSRBootReceiver">
+   	    <intent-filter>
+   	        <action android:name="android.intent.action.BOOT_COMPLETED" />
+   	    </intent-filter>
+   	</receiver>
+   	
+   	<receiver android:name="eu.neosurance.sdk.NSRFenceCallback" />
+   	
+   	<receiver android:name="eu.neosurance.sdk.NSRActivityCallback" />
+   	
+   	<receiver android:name="eu.neosurance.sdk.NSRDelayedPush" />
+   	
+   	<receiver android:name="eu.neosurance.sdk.NSRBackground" />
+   	```
+	
+4. Inside your **AndroidManifest.xml** be sure to have the following service:
+   
+    ```xml
+   	<service android:exported="false" android:name="eu.neosurance.sdk.NSRForeground" />
+   	```
+
+5. Inside your **AndroidManifest.xml** be sure to have the following provider:
+      
+   ```xml
+    <provider android:authorities="${applicationId}.provider" 
+              android:exported="false" 
+              android:grantUriPermissions="true" 
+              android:name="android.support.v4.content.FileProvider">
+        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
+    </provider>
+    ```
+	
+ 6. Inside your **platforms/android/app/build.gradle** replace your statement **'dependencies'** and rebuild project:
+	
+	```
+	/*
+     * WARNING: Cordova Lib and platform scripts do management inside of this code here,
+     * if you are adding the dependencies manually, do so outside the comments, otherwise
+     * the Cordova tools will overwrite them
+     */
+     
+     dependencies {
+             implementation fileTree(dir: 'libs', include: '*.jar')
+             // SUB-PROJECT DEPENDENCIES START
+             implementation(project(path: ":CordovaLib"))
+            ...
+     }
+	```
+	with
+	
+	```
+	android {
+        compileSdkVersion 28
+    
+        defaultConfig {
+            minSdkVersion 19
+            targetSdkVersion 28
+            versionCode 3
+            versionName "3.0.0"
+            multiDexEnabled true
+        }
+    }
+    
+    dependencies {
+        implementation fileTree(dir: 'libs', include: '*.jar')
+        // SUB-PROJECT DEPENDENCIES START
+        implementation(project(path: ":CordovaLib"))
+        implementation "com.android.support:support-annotations:27.+"
+        implementation 'com.android.support:appcompat-v7:28.0.0'
+        implementation 'com.android.support:support-v4:28.0.0'
+        implementation 'com.google.android.gms:play-services-location:15.0.1'
+        // SUB-PROJECT DEPENDENCIES END
+    }
+	```
+
+7. Inside your android app **java/** be sure to have the following Packages with several files:
+         
+      ```
+       eu.neosurance.
+            - cordova 
+                (NSRCordovaInterface.java)
+            
+            - sdk
+                (NSR.java)
+                (...)
+            
+            - sdk_ext
+                (WFDelegate.java)
+                (...)
+            
+            - utils
+                (NSRUtils.java)
+                (...)
+       ```
 
 ## Usage
 
-GalaxyGear.onConnect(function(data) {
-		console.log("OK");
-		console.log(JSON.stringify(data));
-		
-		GalaxyGear.onDataReceived({},function(data) {
-				console.log("OK");
-				console.log(JSON.stringify(data));
-			},function(error) {
-				console.log("KO");
-				console.log(JSON.stringify(error));
-		});	
-		
-	},function(error) {
-		console.log("KO");
-		console.log(JSON.stringify(error));
-});
+1. ### setup
+	Earlier in your Ionic Cordova application startup flow using
 
+    ```js
+    Neosurance.NSR_Setup()
+    ```
+    
+    ```js
+    Neosurance.NSR_RegisterUser({
+        email: "mario.rossi@neosurance.eu",
+        firstname: "Mario",
+        lastname: "Rossi",
+        fiscalCode: "MRXRSS92T01D850W",
+        address: "Via Canova 12",
+        city: "Milano",
+        stateProvince: "MI"
+    })
+    ```
+    
+    ```js
+    nsr_event_cruncher.EVC.init()
+    ```
+    
+    and try it with:
+    
+    ```js
+    scriptJS.sendEvent()
+     ```
+     
+2. ### For further information see NSR SDK Docs
+	
+	<p align="left"><b><a href="https://github.com/neosurance/NeosuranceSDK_v3_android"> </a></b></p>
+	
+	...It's *mandatory* that your **securityDelegate** implements the **default constructor** and must be excluded from any obfuscation (ProGuard).  
+	Then use the ***setSecurityDelegate*** method...
+	
+3. ### RegisterUser  
+	When the user is recognized by your application, register him in our *SDK* creating an **NSRUser**  
+	The **NSRUser** has the following fields:
+	
+	**code**: the user code in your system (can be equals to the email)  
+	**email**: the email is the real primary key  
+	**firstname** *optional*  
+	**lastname** *optional*  
+	**mobile** *optional*  
+	**fiscalCode** *optional*  
+	**gender** *optional*  
+	**birthday** *optional*  
+	**address** *optional*  
+	**zipCode** *optional*  
+	**city** *optional*  
+	**stateProvince** *optional*  
+	**country** *optional*  
+	**extra** *optional*: will be shared with us  
+	**locals** *optional*: will not be exposed outside the device  
 
-GalaxyGear.onConnect(function(data) {
-		console.log("OK");
-		console.log(JSON.stringify(data));
-		
-		GalaxyGear.sendData({"int": 1, "message": "Messaggio di prova"},true,function(data) {
-				console.log("OK");
-				console.log(JSON.stringify(data));
-			},function(error) {
-				console.log("KO");
-				console.log(JSON.stringify(error));
-		});
-		
-	},function(error) {
-		console.log("KO");
-		console.log(JSON.stringify(error));
-});
+	```java
+	NSRUser user = new NSRUser();
+	user.setEmail("jhon.doe@acme.com");
+	user.setCode("jhon.doe@acme.com");
+	user.setFirstName("Jhon");
+	user.setLastName("Doe");
+	NSR.getInstance(this).registerUser(user);
+	```
 
+## Author
 
-## Protocols
+info@neosurance.eu
 
-JSON Object Protocol example
+## License
 
-    var commands = ["$connect:", "$start:", "$pause:", "$stop:", "$get_data:"];
+NeosuranceSDK is available under the MIT license. See the LICENSE file for more info.
 
-	//from Tizen to Android
-    var exReceivedObj = {
-
-        'command': '$start:',
-        'payload': [{
-                    max_speed: 23,
-                    dislivello: 2,
-                    nr_discesa: 13,
-                    altitudine: 2000,
-                    total_time: 15*60*000,
-                    message: "free text..."
-        }, {}, ...]
-
-    };
-
-	//from Android to Tizen
-    var exSentObj = {
-
-        'payload': [{
-            max_speed: 23,
-            dislivello: 2,
-            nr_discesa: 13,
-            altitudine: 2000,
-            total_time: 15*60*000, //15min in millisecs
-            message: "free text..."
-        }, {}, ...];
+[cordova]: https://cordova.apache.org
+[CLI]: http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface
+[apache2_license]: http://opensource.org/licenses/Apache-2.0
