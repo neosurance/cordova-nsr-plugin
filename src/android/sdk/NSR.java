@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import com.google.android.gms.location.ActivityRecognitionClient;
+
+import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -369,14 +371,14 @@ public class NSR {
 
 	//********** LOGIN AND PAYMENT **********//
 
-	public static void loginExecuted(String url) {
+	public static void loginExecuted(String url, CallbackContext NSR_LoginExecutedCallback) {
 		urlX = url;
-		NSRUser.loginExecuted(urlX,ctx);
+		NSRUser.loginExecuted(urlX,ctx,NSR_LoginExecutedCallback);
 	}
 
-	public static void paymentExecuted(JSONObject paymentInfo, String url) {
+	public static void paymentExecuted(JSONObject paymentInfo, String url, CallbackContext NSR_PaymentExecutedCallback) {
 		urlX = url;
-		NSRUser.paymentExecuted(paymentInfo,urlX);
+		NSRUser.paymentExecuted(paymentInfo,urlX,NSR_PaymentExecutedCallback);
 	}
 
 	//********** PUSH NOTIFICATIONS (NSRPush) **********//

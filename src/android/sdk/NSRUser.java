@@ -2,10 +2,17 @@ package eu.neosurance.sdk;
 
 import android.content.Context;
 import android.os.Build;
+
+import org.apache.cordova.CallbackContext;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.Date;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.Properties;
+
+import eu.neosurance.cordova.NSRCordovaInterface;
+import eu.neosurance.sdk_ext.WFDelegate;
 import eu.neosurance.utils.NSRJsonAdapter;
 import eu.neosurance.utils.NSRUtils;
 import static eu.neosurance.sdk.NSR.initJob;
@@ -187,12 +194,29 @@ public class NSRUser {
 		} else {
 			NSRUser user = NSRUser.getUser(ctx);
 			JSONObject settings = NSRUtils.getSettings(ctx);
+
+			if(settings == null){
+				Properties config = new Properties();
+				try {
+					config.load(ctx.getAssets().open("config.properties"));
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				settings = new JSONObject();
+				settings.put("base_url",config.getProperty("base_url"));
+				settings.put("code",config.getProperty("code"));
+				settings.put("secret_key",config.getProperty("secret_key"));
+			}
+
 			if (user != null && settings != null) {
 				try {
 					JSONObject payload = new JSONObject();
-					payload.put("user_code", user.getCode());
+					String UserCode = (user.getCode() != null) ? user.getCode() : "ale@ale.it";
+					payload.put("user_code", UserCode);
 					payload.put("code", settings.getString("code"));
 					payload.put("secret_key", settings.getString("secret_key"));
+					payload.put("base_url", settings.getString("base_url"));
 
 					JSONObject sdkPayload = new JSONObject();
 					sdkPayload.put("version", NSRUtils.getVersion());
@@ -249,6 +273,10 @@ public class NSRUser {
 			authorize(new NSRAuth() {
 				public void authorized(boolean authorized) throws Exception {
 					NSRLog.d("registerUser: " + (authorized ? "" : "not ") + "authorized!");
+
+					if(authorized && NSRCordovaInterface.NSR_RegisterUserCallback != null )
+						NSRCordovaInterface.NSR_RegisterUserCallback.success(new JSONObject("{'NSR_RegisterUserCallback_Success': 'authorized!'}"));
+
 					if (authorized && NSRUtils.getBoolean(NSRUtils.getConf(ctx), "send_user")) {
 						NSRLog.d("sendUser");
 						try {
@@ -292,7 +320,7 @@ public class NSRUser {
 		}
 	}
 
-	public static void loginExecuted(String url, Context ctx) {
+	public static void loginExecuted(String url, Context ctx, CallbackContext NSR_LoginExecutedCallback) {
 		if (NSRUtils.gracefulDegradate())
 			return;
 		try {
@@ -300,20 +328,39 @@ public class NSRUser {
 			JSONObject params = new JSONObject();
 			params.put("loginExecuted", "yes");
 			NSR.showUrl(url, params);
+
+			params.put("urlx",url);
+
+			if(NSR_LoginExecutedCallback != null)
+				NSR_LoginExecutedCallback.success(params);
+
 		} catch (Exception e) {
 			NSRLog.e("loginExecuted", e);
+
+			if(NSR_LoginExecutedCallback != null)
+				NSR_LoginExecutedCallback.error(e.getMessage());
 		}
+
 	}
 
-	public static void paymentExecuted(JSONObject paymentInfo, String url) {
+	public static void paymentExecuted(JSONObject paymentInfo, String url, CallbackContext NSR_PaymentExecutedCallback) {
 		if (NSRUtils.gracefulDegradate())
 			return;
 		try {
 			JSONObject params = new JSONObject();
 			params.put("paymentExecuted", paymentInfo.toString());
 			NSR.showUrl(url, params);
+
+			params.put("urlx",url);
+
+			if(NSR_PaymentExecutedCallback != null)
+				NSR_PaymentExecutedCallback.success(params);
+
 		} catch (Exception e) {
 			NSRLog.e("paymentExecuted", e);
+
+			if(NSR_PaymentExecutedCallback != null)
+				NSR_PaymentExecutedCallback.error(e.getMessage());
 		}
 	}
 

@@ -4,6 +4,9 @@ import android.content.Context;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Locale;
+import java.util.Properties;
+
+import eu.neosurance.sdk_ext.WFDelegate;
 import eu.neosurance.utils.NSRUtils;
 
 import io.ionic.starter.R;
@@ -17,6 +20,35 @@ public class NSRSettings {
 	private boolean disableLog = false;
 	private boolean devMode = false;
 	private JSONObject miniappSkin;
+
+	public static NSRSettings settings = null;
+
+	public static void setNSRSettings(){
+
+		if(settings == null){
+			Properties config = new Properties();
+			settings = new NSRSettings();
+			settings.setBaseUrl(config.getProperty("base_url"));
+			settings.setCode(config.getProperty("code"));
+			settings.setSecretKey(config.getProperty("secret_key"));
+			settings.setDevMode(true);
+		}
+
+	}
+
+	public JSONObject getJSONNSRSettings(){
+		JSONObject json = new JSONObject();
+		try {
+			json.put("base_url",settings.getBaseUrl());
+			json.put("code",settings.getCode());
+			json.put("secret_key",settings.getSecretKey());
+			json.put("dev_mode",settings.isDevMode());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
 
 	//********** NSR_SECURITY_DELEGATE **********//
 
@@ -142,3 +174,4 @@ public class NSRSettings {
 		return jsonObject;
 	}
 }
+//new

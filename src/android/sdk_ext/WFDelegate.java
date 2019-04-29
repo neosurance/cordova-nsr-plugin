@@ -9,8 +9,11 @@ import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import org.apache.cordova.CordovaArgs;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import eu.neosurance.cordova.NSRCordovaInterface;
 import eu.neosurance.sdk.NSRWorkflowDelegate;
 
 import static eu.neosurance.sdk_ext.NSRActivity.TAG;
@@ -21,11 +24,12 @@ public class WFDelegate implements NSRWorkflowDelegate {
 	@Override
 	public boolean executeLogin(final Context ctx, final String url) {
 		Log.d(TAG, "executeLogin");
-		Log.d(TAG, "MainActivity: " + eu.neosurance.sdk_ext.NSRActivity.created + " " + eu.neosurance.sdk_ext.NSRActivity.ready);
+		Log.d(TAG, "NSRActivity: " + eu.neosurance.sdk_ext.NSRActivity.created + " " + eu.neosurance.sdk_ext.NSRActivity.ready);
 
 		setData(ctx, "login_url", url);
 
 		if (!eu.neosurance.sdk_ext.NSRActivity.ready) {
+			eu.neosurance.sdk_ext.NSRActivity.ready = true;
 			Log.d(TAG, "eu.neosurance.sdk_ext.NSRActivity not ready");
 			if (!eu.neosurance.sdk_ext.NSRActivity.created) {
 				Log.d(TAG, "eu.neosurance.sdk_ext.NSRActivity launching");
@@ -41,6 +45,17 @@ public class WFDelegate implements NSRWorkflowDelegate {
 			Intent intent = new Intent("WFStuff");
 			intent.putExtra("message", "showLogin()");
 			LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent);
+
+			JSONObject json = new JSONObject();
+			try {
+
+				json.put("url",url);
+				NSRCordovaInterface.SetNSRLoggedUrl(json);
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
 		}
 		return true;
 	}
@@ -66,8 +81,15 @@ public class WFDelegate implements NSRWorkflowDelegate {
 			Intent intent = new Intent("WFStuff");
 			intent.putExtra("message", "showPay()");
 			LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent);
+			try {
+				payment.put("payment_url",url);
+				NSRCordovaInterface.appPaymentHandler(payment);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
 		}
-		return null;
+		return payment;
 	}
 
 	@Override

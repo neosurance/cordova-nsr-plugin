@@ -28,6 +28,7 @@ import eu.neosurance.sdk.NSRActivityWebView;
 import eu.neosurance.sdk.NSREventWebView;
 import eu.neosurance.sdk.NSRLog;
 
+import eu.neosurance.sdk.NSRSettings;
 import io.ionic.starter.BuildConfig;
 
 public class NSRUtils {
@@ -132,7 +133,10 @@ public class NSRUtils {
 
     public static String getPushToken(Context ctx) {
         try {
-            return getSettings(ctx).has("push_token") ? getSettings(ctx).getString("push_token") : null;
+            if(getSettings(ctx) != null)
+                return getSettings(ctx).has("push_token") ? getSettings(ctx).getString("push_token") : null;
+            else
+                return null;
         } catch (Exception e) {
             NSRLog.e("getPushToken", e);
             return null;
@@ -141,9 +145,10 @@ public class NSRUtils {
 
     public static String getLang(Context ctx) {
         try {
-            if(ctx != null)
+            if(ctx != null && getSettings(ctx) != null)
                 return getSettings(ctx).has("ns_lang") ? getSettings(ctx).getString("ns_lang") : null;
-            else return null;
+            else
+                return null;
         } catch (Exception e) {
             NSRLog.e("getLang", e);
             return null;
@@ -176,7 +181,8 @@ public class NSRUtils {
 
     public static String getToken(Context ctx) {
         try {
-            return getAuth(ctx).has("token") ? getAuth(ctx).getString("token") : null;
+            JSONObject authTmp = getAuth(ctx);
+            return authTmp.has("token") ? authTmp.getString("token") : null;
         } catch (Exception e) {
             NSRLog.e("getToken", e);
             return null;

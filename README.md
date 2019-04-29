@@ -30,6 +30,7 @@ The plugin allows hybrid cordova applications to use Neosurance SDK.
 
 ```js
 Neosurance.NSR_RegisterUser({
+    code:"mario.rossi",
     email: "mario.rossi@neosurance.eu",
     firstname: "Mario",
     lastname: "Rossi",

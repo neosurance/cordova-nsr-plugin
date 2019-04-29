@@ -19,11 +19,11 @@ var scriptJS = {
 		}
 	},
 
- 	getById: function(id) {
+	getById: function(id) {
 		return document.getElementById(id);
 	},
 
- 	init: function() {
+	init: function(user, win, fail) {
 
 		scriptJS.postMsg({
 			what : 'ready'
@@ -63,32 +63,49 @@ var scriptJS = {
 
 			}
 
+			Neosurance.NSR_RegisterUser(user, win, fail);
+
 		}
 
 	},
 
+	registerUser: function(user, win, fail) {
 
- 	registerUser: function() {
+		/*
+        var user = {
+          code:"mario@rossi.com",
+          email: "mario@rossi.com",
+          firstname: "Mario",
+          lastname: "Rossi",
+          fiscalCode: "RSSMRA85T01F205P",
+          address: "Via Canova 12",
+          city: "Milano",
+          stateProvince: "MI",
+          locals:""
+        };
 
-		var user = {
-			email: "ale@ale.it", //scriptJS.getById('email').value.trim(),
-			firstname: "ale", //scriptJS.getById('firstname').value.trim(),
-			lastname: "infu", //scriptJS.getById('lastname').value.trim(),
-			fiscalCode: "NFRLSN85T01D960I", //scriptJS.getById('fiscalCode').value.trim(),
-			address: "Via Canova 12", //scriptJS.getById('address').value.trim(),
-			city: "Milano", //scriptJS.getById('city').value.trim(),
-			stateProvince: "MI" //scriptJS.getById('stateProvince').value.trim()
-		};
+        user.locals = {
+          email : user.email,
+          firstname : user.firstname,
+          lastname : user.lastname,
+          fiscalCode : user.fiscalCode,
+          address : user.address,
+          city : user.city,
+          stateProvince : user.stateProvince,
+          pushToken : 'fake-push'
+        };
 
-		localStorage.setItem('ingdemo_user', JSON.stringify(user));
+        */
 
-		scriptJS.init();
+		if(typeof user != "undefined" && user != null)
+			localStorage.setItem('ingdemo_user', JSON.stringify(user));
 
+		Neosurance.NSR_RegisterUser(user, win, fail);
 	},
 
 
 
- 	sendEvent: function() {
+	sendEvent: function() {
 
 		var places = [ {
 			fake : 1,
@@ -117,7 +134,7 @@ var scriptJS = {
 
 	},
 
- 	loginDone: function() {
+	loginDone: function() {
 
 		scriptJS.postMsg({
 			what : 'loginExecuted'
@@ -125,7 +142,7 @@ var scriptJS = {
 
 	},
 
- 	payDone: function() {
+	payDone: function() {
 
 		scriptJS.postMsg({
 			what : 'paymentExecuted'
@@ -136,3 +153,4 @@ var scriptJS = {
 };
 
 module.exports = scriptJS;
+

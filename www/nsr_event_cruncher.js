@@ -30,7 +30,10 @@ var nsr_event_cruncher = {
     EVC: {
 
 
-        init: function () {
+        init: function (win,fail) {
+
+            win({res: '>>> EVC INIT OK'});
+
             if (localStorage.getItem("nsr_chains") != null)
                 window.eval(localStorage.getItem("nsr_chains"));
             nsr_event_cruncher.EVC.synch();
@@ -55,6 +58,7 @@ var nsr_event_cruncher = {
 
             if (res.status == 'ok') {
                 nsr_event_cruncher.NSRlog('refresh chains!');
+
                 localStorage.setItem("nsr_chainstime", res.chains_time);
                 localStorage.setItem("nsr_chains", res.chains);
                 window.eval(res.chains);

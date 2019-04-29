@@ -1,252 +1,269 @@
-//aleinfu
 var exec = cordova.require('cordova/exec');
 var	service = "Neosurance";
-var ready = false;
 
 var Neosurance = {
 
-	//***** CordovaWebView <-- Native Android App
+	login_url: "",
 
-	onSetup: function (win, fail) {
-		exec(win, fail, service, "onSetupHandler", []);
-	},
+	payment: "",
 
-	onRegisterUser: function (win, fail) {
-		exec(win, fail, service, "onRegisterUserHandler", []);
-	},
-
-
-	onAppLogin: function (handle, win, fail) {
-		exec(win, fail, service, "onAppLoginHandler", [handle]);
-	},
-
-	onAppPayment: function (handle, win, fail) {
-		exec(win, fail, service, "onAppPaymentHandler", [handle]);
-	},
-
-
-	//***** CordovaWebView -> Native Android App
+	payment_url: "",
 
 	initNSRCordovaInterface: function (obj, win, fail) {
 
 		if (typeof win == "undefined" || win == null)
 			win = function (data) {
 				console.log("initNSRCordovaInterface - Javascipt - OK");
-				ready = false;
 			};
 
 		if (typeof fail == "undefined" || fail == null)
 			fail = function (error) {
 				console.log("initNSRCordovaInterface - Javascipt - KO");
-				ready = false;
 			};
-
 
 		exec(win, fail, service, "init_nsr", [obj]);
 
 	},
 
-	//NSR_Setup
 	NSR_Setup: function (obj, win, fail) {
 
-			if(typeof obj == "undefined" || obj == null)
-				obj = {"int": 1, "message": "nsr_setup"};
+		if(typeof obj == "undefined" || obj == null)
+			obj = {"int": 1, "message": "nsr_setup"};
 
 
-			if (typeof win == "undefined" || win == null)
-				win = function (data) {
-					console.log("NSR_SETUP - Javascipt - OK");
-					ready = false;
-				};
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_SETUP - Javascipt - OK");
+				Neosurance.startSDKMainActivity();
+			};
 
-			if (typeof fail == "undefined" || fail == null)
-				fail = function (error) {
-					console.log("NSR_SETUP - Javascipt - KO");
-					ready = false;
-				};
-
-
-			//exec(function(winParam) {}, function(error) {}, "service","action", ["firstArgument", "secondArgument", 42, false]);
-			exec(win, fail, service, "nsr_setup", [obj]); //start_sdk_main_activity
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_SETUP - Javascipt - KO");
+			};
 
 
+		//exec(function(winParam) {}, function(error) {}, "service","action", ["firstArgument", "secondArgument", 42, false]);
+		exec(win, fail, service, "nsr_setup", [obj]); //start_sdk_main_activity
 
 	},
 
-	//NSR_RegisterUser
 	NSR_RegisterUser: function (obj, win, fail) {
 
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_RegisterUser - Javascipt - OK");
+			};
 
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_RegisterUser - Javascipt - KO");
+			};
 
-			ready = true;
-
-			if (typeof win == "undefined" || win == null)
-				win = function (data) {
-					console.log("NSR_RegisterUser - Javascipt - OK");
-					ready = false;
-				};
-
-			if (typeof fail == "undefined" || fail == null)
-				fail = function (error) {
-					console.log("NSR_RegisterUser - Javascipt - KO");
-					ready = false;
-				};
-
-			exec(win, fail, service, "nsr_register_user", [obj]);
-
-
+		exec(win, fail, service, "nsr_register_user", [obj]);
 
 	},
 
+	NSR_SetLoginCallback: function (obj, win, fail) {
 
-	//NSR_AppLogin
-	NSR_AppLogin: function (obj, win, fail) {
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_SetLoginCallback - Javascipt - OK");
+			};
 
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_SetLoginCallback - Javascipt - KO");
+			};
 
+		if(obj == "undefined" || obj == null){
+			obj = {"msg":"nsr_app_login"};
+		}
 
-			ready = true;
-
-			if (typeof win == "undefined" || win == null)
-				win = function (data) {
-					console.log("NSR_AppLogin - Javascipt - OK");
-					ready = false;
-				};
-
-			if (typeof fail == "undefined" || fail == null)
-				fail = function (error) {
-					console.log("NSR_AppLogin - Javascipt - KO");
-					ready = false;
-				};
-
-			exec(win, fail, service, "nsr_app_login", [obj]);
-
-
+		exec(win, fail, service, "nsr_app_login", [obj]);
 
 	},
 
-	//NSR_AppPayment
+	NSR_LoginExecuted: function (obj, win, fail) {
+
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_LoginExecuted - Javascipt - OK");
+			};
+
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_LoginExecuted - Javascipt - KO");
+			};
+
+		if(obj == "undefined" || obj == null){
+			obj = {url: Neosurance.login_url};
+		}
+
+		exec(win, fail, service, "nsr_login_executed", [obj]);
+
+	},
+
 	NSR_AppPayment: function (obj, win, fail) {
 
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_AppPayment - Javascipt - OK");
+			};
 
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_AppPayment - Javascipt - KO");
+			};
 
-			ready = true;
+		if(obj == "undefined" || obj == null){
+			obj = {"msg":"nsr_app_payment"};
+		}
 
-			if (typeof win == "undefined" || win == null)
-				win = function (data) {
-					console.log("NSR_AppPayment - Javascipt - OK");
-					ready = false;
-				};
-
-			if (typeof fail == "undefined" || fail == null)
-				fail = function (error) {
-					console.log("NSR_AppPayment - Javascipt - KO");
-					ready = false;
-				};
-
-			exec(win, fail, service, "nsr_app_payment", [obj]);
-
-
+		exec(win, fail, service, "nsr_app_payment", [obj]);
 
 	},
 
+	NSR_PaymentExecuted: function (obj, win, fail) {
 
-	//NSR_SendEvent
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_PaymentExecuted - Javascipt - OK");
+
+				if(typeof Neosurance != "undefined" && Neosurance != null &&
+					typeof Neosurance.payment != "undefined" && Neosurance.payment != null &&
+					typeof Neosurance.payment_url != "undefined" && Neosurance.payment_url != null) {
+
+					console.log("Neosurance.payment: " + JSON.stringify(Neosurance.payment) );
+					console.log("Neosurance.payment_url: " + Neosurance.payment_url);
+
+				}
+
+			};
+
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_PaymentExecuted - Javascipt - KO");
+
+				if(typeof Neosurance != "undefined" && Neosurance != null &&
+					typeof Neosurance.payment != "undefined" && Neosurance.payment != null &&
+					typeof Neosurance.payment_url != "undefined" && Neosurance.payment_url != null) {
+
+					console.log("Neosurance.payment: " + JSON.stringify(Neosurance.payment) );
+					console.log("Neosurance.payment_url: " + Neosurance.payment_url);
+
+				}
+
+			};
+
+		if(typeof Neosurance != "undefined" && Neosurance != null &&
+			typeof Neosurance.payment != "undefined" && Neosurance.payment != null &&
+			typeof Neosurance.payment_url != "undefined" && Neosurance.payment_url != null)
+			obj = {"payment": Neosurance.payment, "payment_url": Neosurance.payment_url};
+
+		exec(win, fail, service, "nsr_payment_executed", [obj]);
+
+	},
+
 	NSR_SendEvent: function (obj, win, fail) {
 
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_SendEvent - Javascipt - OK");
+			};
 
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_SendEvent - Javascipt - KO");
+			};
 
-			ready = true;
+		if(typeof obj == "undefined" || obj == null){
+			var places = [ {
+				fake : 1,
+				fromCode : 'IT',
+				fromCountry : 'Italia',
+				toCode : 'FR',
+				toCountry : 'Francia'
+			}, {
+				fake : 1,
+				fromCode : 'IT',
+				fromCountry : 'Italia',
+				toCode : 'US',
+				toCountry : 'Stati Uniti'
+			}, {
+				fake : 1,
+				fromCode : 'IT',
+				fromCountry : 'Italia',
+				toCode : 'JP',
+				toCountry : 'Giappone'
+			} ];
 
-			if (typeof win == "undefined" || win == null)
-				win = function (data) {
-					console.log("NSR_SendEvent - Javascipt - OK");
-					ready = false;
-				};
+			obj = {
+				event : 'countryChange',
+				payload : places[0],
+			};
+		}
 
-			if (typeof fail == "undefined" || fail == null)
-				fail = function (error) {
-					console.log("NSR_SendEvent - Javascipt - KO");
-					ready = false;
-				};
-
-			exec(win, fail, service, "nsr_send_event", [obj]);
-
-
+		exec(win, fail, service, "nsr_send_event", [obj]);
 
 	},
 
-	//NSR_SendAction
 	NSR_SendAction: function (obj, win, fail) {
 
-
-
-			ready = true;
-
-			if (typeof win == "undefined" || win == null)
-				win = function (data) {
-					console.log("NSR_SendAction - Javascipt - OK");
-					ready = false;
-				};
-
-			if (typeof fail == "undefined" || fail == null)
-				fail = function (error) {
-					console.log("NSR_SendAction - Javascipt - KO");
-					ready = false;
-				};
-
-			exec(win, fail, service, "nsr_send_action", [obj]);
-
-
-
-	},
-
-
-	//NSR_PostMessage
-	NSR_PostMessage: function (obj, win, fail) {
-
-			ready = true;
-
-			if (typeof win == "undefined" || win == null)
-				win = function (data) {
-					console.log("NSR_PostMessage - Javascipt - OK");
-					ready = false;
-				};
-
-			if (typeof fail == "undefined" || fail == null)
-				fail = function (error) {
-					console.log("NSR_PostMessage - Javascipt - KO");
-					ready = false;
-				};
-
-			exec(win, fail, service, "nsr_post_message", [obj]);
-
-	},
-
-	//startSDKMainActivity
-	startSDKMainActivity: function (obj, win, fail) {
-
-		if (typeof obj == "undefined" || obj == null)
-			obj = {
-				what: 'registerUser',
-				user: {
-					email: 'fake.ale@ale.it',
-					code: 'fake.ale@ale.it',
-				}
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_SendAction - Javascipt - OK");
 			};
+
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_SendAction - Javascipt - KO");
+			};
+
+		if(typeof obj == "undefined" || obj == null){
+			var places = [ {
+				fake : 1,
+				fromCode : 'IT',
+				fromCountry : 'Italia',
+				toCode : 'FR',
+				toCountry : 'Francia'
+			}, {
+				fake : 1,
+				fromCode : 'IT',
+				fromCountry : 'Italia',
+				toCode : 'US',
+				toCountry : 'Stati Uniti'
+			}, {
+				fake : 1,
+				fromCode : 'IT',
+				fromCountry : 'Italia',
+				toCode : 'JP',
+				toCountry : 'Giappone'
+			} ];
+
+			obj = {
+				event : 'countryChange',
+				payload : places[0],
+			};
+		}
+
+		exec(win, fail, service, "nsr_send_action", [obj]);
+
+	},
+
+	NSR_PostMessage: function (obj, win, fail) {
 
 		if (typeof win == "undefined" || win == null)
 			win = function (data) {
 				console.log("NSR_PostMessage - Javascipt - OK");
-				ready = false;
 			};
 
 		if (typeof fail == "undefined" || fail == null)
 			fail = function (error) {
 				console.log("NSR_PostMessage - Javascipt - KO");
-				ready = false;
 			};
 
-		exec(win, fail, service, "start_sdk_main_activity", [obj]);
+		exec(win, fail, service, "nsr_post_message", [obj]);
 
 	}
 

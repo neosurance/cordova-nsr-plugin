@@ -37,13 +37,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
+
 import eu.neosurance.utils.NSRUtils;
 
 public class NSRActivityWebView extends AppCompatActivity {
-	private WebView webView;
+	public static WebView webView;
 	private String photoCallback;
 	private NSR nsr;
 
@@ -56,8 +59,10 @@ public class NSRActivityWebView extends AppCompatActivity {
 		try {
 			String url = getIntent().getExtras().getString("url");
 			webView = new WebView(this);
+
 			if (Build.VERSION.SDK_INT >= 21) {
-				WebView.setWebContentsDebuggingEnabled(NSRUtils.getBoolean(NSRUtils.getSettings(getApplicationContext()), "dev_mode"));
+				boolean bool = NSRSettings.settings.isDevMode();
+				WebView.setWebContentsDebuggingEnabled(bool);
 			}
 			webView.addJavascriptInterface(this, "NSSdk");
 			webView.getSettings().setJavaScriptEnabled(true);
@@ -139,6 +144,21 @@ public class NSRActivityWebView extends AppCompatActivity {
 						public void authorized(boolean authorized) throws Exception {
 							JSONObject settings = NSRUtils.getSettings(getApplicationContext());
 							JSONObject message = new JSONObject();
+
+							if(settings == null){
+								Properties config = new Properties();
+								try {
+									config.load(getApplicationContext().getAssets().open("config.properties"));
+								}catch (IOException e) {
+									e.printStackTrace();
+								}
+
+								settings = new JSONObject();
+								settings.put("base_url",config.getProperty("base_url"));
+								settings.put("code",config.getProperty("code"));
+								settings.put("secret_key",config.getProperty("secret_key"));
+							}
+
 							message.put("api", settings.getString("base_url"));
 							message.put("token", NSRUtils.getToken(getApplicationContext()));
 							message.put("lang", NSRUtils.getLang(getApplicationContext()));
@@ -245,10 +265,23 @@ public class NSRActivityWebView extends AppCompatActivity {
 					new Handler(Looper.getMainLooper()).post(new Runnable() {
 						public void run() {
 							try {
-								JSONObject paymentInfo = nsr.getWorkflowDelegate().executePayment(getApplicationContext(), body.getJSONObject("payment"), webView.getUrl());
-								if (body.has("callBack") && Build.VERSION.SDK_INT >= 21) {
-									webView.evaluateJavascript(body.getString("callBack") + "(" + (paymentInfo != null ? paymentInfo.toString() : "") + ")", null);
-								}
+								if(Build.VERSION.SDK_INT >= 21)
+									nsr.getWorkflowDelegate().executePayment(getApplicationContext(), body.getJSONObject("payment"), webView.getUrl());
+								//JSONObject paymentInfo = nsr.getWorkflowDelegate().executePayment(getApplicationContext(), body.getJSONObject("payment"), webView.getUrl());
+								//if (body.has("callBack") && Build.VERSION.SDK_INT >= 21) {
+								//	webView.evaluateJavascript(body.getString("callBack") + "(" + (paymentInfo != null ? paymentInfo.toString() : "") + ")", null);
+								//}
+
+								/*
+
+								try {
+				payment.put("url",url);
+				NSRCordovaInterface.appPaymentHandler(payment);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+								*/
 							} catch (Throwable e) {
 							}
 						}
@@ -388,7 +421,8 @@ public class NSRActivityWebView extends AppCompatActivity {
 	}
 
 	public synchronized void finish() {
-		nsr.clearWebView();
+		if(nsr != null)
+			nsr.clearWebView();
 		new Handler(Looper.getMainLooper()).post(new Runnable() {
 			public void run() {
 				try {
@@ -436,3 +470,4 @@ public class NSRActivityWebView extends AppCompatActivity {
 	}
 
 }
+//new

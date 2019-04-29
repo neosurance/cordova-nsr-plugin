@@ -14,6 +14,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,9 +22,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Properties;
 
+import eu.neosurance.cordova.NSRCordovaInterface;
 import eu.neosurance.sdk.NSR;
 import eu.neosurance.sdk.NSRSettings;
 import eu.neosurance.sdk.NSRUser;
+
+import static eu.neosurance.cordova.NSRCordovaInterface.NSR_LoginExecutedCallback;
 
 
 public class NSRActivity extends CordovaActivity {
@@ -32,7 +36,7 @@ public class NSRActivity extends CordovaActivity {
 	private BroadcastReceiver wfReceiver;
 	private Properties config;
 	public static boolean created = false;
-	public static boolean ready = false;
+	public static boolean ready = true;
 	public static Context demoContext;
 
 	@Override
@@ -71,14 +75,18 @@ public class NSRActivity extends CordovaActivity {
 				}
 			});
 
-			mainView.loadUrl("file:///android_asset/app.html");
 
+			//mainView.loadUrl("file:///android_asset/app.html");
 			setContentView(mainView);
+			//setup();
+			//wfReceiver = new WFReceiver(this);
+			//LocalBroadcastManager.getInstance(this).registerReceiver(wfReceiver, new IntentFilter("WFStuff"));
 
-			setup();
+			Intent intent = new Intent(demoContext, io.ionic.starter.MainActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			demoContext.startActivity(intent);
 
-			wfReceiver = new WFReceiver(this);
-			LocalBroadcastManager.getInstance(this).registerReceiver(wfReceiver, new IntentFilter("WFStuff"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -97,6 +105,7 @@ public class NSRActivity extends CordovaActivity {
 		NSR.getInstance(this).askPermissions(this);
 
 		//SHAKE SETTINGS
+		/*
 		JSONObject jsonShake = new JSONObject();
 		try {
 			jsonShake.put("label","inAirport");
@@ -105,6 +114,7 @@ public class NSRActivity extends CordovaActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		*/
 
 	}
 
@@ -113,7 +123,7 @@ public class NSRActivity extends CordovaActivity {
 		Log.d(TAG, "appLogin");
 		String url = WFDelegate.getData(this, "login_url");
 		if (url != null) {
-			NSR.getInstance(this).loginExecuted(url);
+			NSR.getInstance(this).loginExecuted(url, NSRCordovaInterface.NSR_LoginExecutedCallback);
 			WFDelegate.setData(this, "login_url", null);
 		}
 
@@ -128,7 +138,7 @@ public class NSRActivity extends CordovaActivity {
 				JSONObject paymentInfo = new JSONObject();
 				paymentInfo.put("transactionCode", "fakeTransactionCode");
 				paymentInfo.put("iban", "fakeClientIban");
-				NSR.getInstance(this).paymentExecuted(paymentInfo, url);
+				NSR.getInstance(this).paymentExecuted(paymentInfo, url, NSRCordovaInterface.NSR_PaymentExecutedCallback);
 				WFDelegate.setData(this, "payment_url", null);
 			}
 		} catch (Exception e) {
