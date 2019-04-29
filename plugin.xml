@@ -33,10 +33,6 @@
 			<clobbers target="nsr_event_cruncher" />
 		</js-module>
 
-		<js-module src="www/wf_delegate.js" name="WF_Delegate">
-			<clobbers target="WF_Delegate" />
-		</js-module>
-
 		<js-module src="www/nsr.js" name="Neosurance">
 			<clobbers target="Neosurance" />
 		</js-module>
