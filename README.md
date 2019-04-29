@@ -55,11 +55,11 @@ The plugin can be installed via [Cordova-CLI][CLI] and is publicly available on 
 
 Execute from the projects root folder:
 
-    $ cordova plugin add https://github.com/neosurance/cordova-nsr-plugin.git
+    $ ionic cordova plugin add https://github.com/neosurance/cordova-nsr-plugin.git
 
 Or install from local source:
 
-    $ cordova plugin add <path> 
+    $ ionic cordova plugin add <path> 
 
 
 ## After Installation
@@ -200,39 +200,81 @@ Or install from local source:
 	Earlier in your Ionic Cordova application startup flow using
 
     ```js
-    Neosurance.NSR_Setup()
+    Neosurance.NSR_Setup(null, win, fail);
     ```
     
+2. ### User Registration    
     ```js
-    Neosurance.NSR_RegisterUser({
-        email: "mario.rossi@neosurance.eu",
-        firstname: "Mario",
-        lastname: "Rossi",
-        fiscalCode: "MRXRSS92T01D850W",
-        address: "Via Canova 12",
-        city: "Milano",
-        stateProvince: "MI"
-    })
+    var user = {
+          code:"mario@rossi.com",
+          email: "mario@rossi.com",
+          firstname: "Mario",
+          lastname: "Rossi",
+          fiscalCode: "RSSMRA85T01F205P",
+          address: "Via Canova 12",
+          city: "Milano",
+          stateProvince: "MI",
+          locals:{}
+        };
+    
+    user.locals = {
+      email : user.email,
+      firstname : user.firstname,
+      lastname : user.lastname,
+      fiscalCode : user.fiscalCode,
+      address : user.address,
+      city : user.city,
+      stateProvince : user.stateProvince,
+      pushToken : 'fake-push'
+    };
+     
+    Neosurance.NSR_RegisterUser(user, win, fail);
+    ```
+
+3. ### enable eventCruncher
+    
+    ```js
+    nsr_event_cruncher.EVC.init(win, fail);
     ```
     
-    ```js
-    nsr_event_cruncher.EVC.init()
-    ```
-    
-    and try it with:
+4. ### Set Login Callbacks
     
     ```js
-    scriptJS.sendEvent()
+    Neosurance.NSR_SetLoginCallback(null, win, fail);
+   ```
+
+5. ### Send Trial Event (ex. 'changeCountry')    
+
+    ```js
+    scriptJS.sendEvent(null, win, fail);
      ```
      
-2. ### For further information see NSR SDK Docs
+6. ### If Login was ok   
+  
+     ```js
+     Neosurance.NSR_LoginExecuted(null, win, fail);NSR_AppPayment
+     ```
+     
+7. ### Set Payment Callbacks 
+
+     ```js
+     Neosurance.NSR_AppPayment(null, win, fail);
+     ```
+     
+7. ### If Payment was ok
+     
+     ```js
+     Neosurance.NSR_PaymentExecuted(null, win, fail);
+     ```
+     
+8. ### For further information see NSR SDK Docs
 	
 	<p align="left"><b><a href="https://github.com/neosurance/NeosuranceSDK_v3_android"> </a></b></p>
 	
 	...It's *mandatory* that your **securityDelegate** implements the **default constructor** and must be excluded from any obfuscation (ProGuard).  
 	Then use the ***setSecurityDelegate*** method...
 	
-3. ### RegisterUser  
+## RegisterUser  
 	When the user is recognized by your application, register him in our *SDK* creating an **NSRUser**  
 	The **NSRUser** has the following fields:
 	
@@ -252,14 +294,7 @@ Or install from local source:
 	**extra** *optional*: will be shared with us  
 	**locals** *optional*: will not be exposed outside the device  
 
-	```java
-	NSRUser user = new NSRUser();
-	user.setEmail("jhon.doe@acme.com");
-	user.setCode("jhon.doe@acme.com");
-	user.setFirstName("Jhon");
-	user.setLastName("Doe");
-	NSR.getInstance(this).registerUser(user);
-	```
+	(Take a look at previous 'Usage' -> 2. User Registration)
 
 ## Author
 

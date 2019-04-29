@@ -17,7 +17,7 @@
 
     <keywords>Neosurance, Android, Insurance, Digital, NSR</keywords>
 
-    <repo>https://github.com/neosurance/NeosuranceSDK_v3.android.git</repo>
+    <repo>https://github.com/neosurance/cordova-nsr-plugin.git</repo>
 	
     <engines>
         <engine name="cordova" version=">=3.0.0" />
