@@ -46,7 +46,7 @@ import java.util.Properties;
 import eu.neosurance.utils.NSRUtils;
 
 public class NSRActivityWebView extends AppCompatActivity {
-	public static WebView webView;
+	public WebView webView;
 	private String photoCallback;
 	private NSR nsr;
 
@@ -470,4 +470,3 @@ public class NSRActivityWebView extends AppCompatActivity {
 	}
 
 }
-//new
