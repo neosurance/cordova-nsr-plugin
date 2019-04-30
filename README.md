@@ -1,7 +1,7 @@
 
 <p align="left">
     <img src="./www/logo_neosurance.png">
-    <b><a href="https://github.com/neosurance/cordova-nsr-plugin.git">NEOSURANCE Ionic Cordova Plugin</a></b>
+    <b><a href="https://github.com/neosurance/cordova-nsr-plugin.git">NSR Ionic Cordova Plugin</a></b>
 </p>
 
 <br>
