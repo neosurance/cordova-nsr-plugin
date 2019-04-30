@@ -1,11 +1,11 @@
 
 <p align="left">
     <img src="./www/logo_neosurance.png">
-    <br>
-    <b><a href="https://github.com/neosurance/cordova-nsr-plugin.git">NSR Ionic Cordova Plugin</a></b>
 </p>
 
 <br>
+
+<p><b><a href="https://github.com/neosurance/cordova-nsr-plugin.git">NSR Ionic Cordova Plugin</a></b></p>
 
 > With Neosurance, Insurers and Communities can offer the right insurance at the right time, creating great customer experiences that drive the adoption of mobile insurance and close the protection gap.
 
