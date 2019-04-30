@@ -269,7 +269,7 @@ Or install from local source:
      
 8. ### For further information see NSR SDK Docs
 	
-	<p align="left"><b><a href="https://github.com/neosurance/NeosuranceSDK_v3_android"> </a></b></p>
+	<p align="left"><b><a href="https://github.com/neosurance/NeosuranceSDK_v3_android">NeosuranceSDK_v3_android</a></b></p>
 	
 	...It's *mandatory* that your **securityDelegate** implements the **default constructor** and must be excluded from any obfuscation (ProGuard).  
 	Then use the ***setSecurityDelegate*** method...
