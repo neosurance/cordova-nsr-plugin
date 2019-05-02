@@ -22,20 +22,25 @@
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
+
+	<dependency id="cordova-plugin-cocoapod-support" />
+
+
+	<js-module src="www/script.js" name="scriptJS">
+		<clobbers target="scriptJS" />
+	</js-module>
+
+	<js-module src="www/nsr_event_cruncher.js" name="nsr_event_cruncher">
+		<clobbers target="nsr_event_cruncher" />
+	</js-module>
+
+	<js-module src="www/nsr.js" name="Neosurance">
+		<clobbers target="Neosurance" />
+	</js-module>
+
+
     
     <platform name="android">
-
-		<js-module src="www/script.js" name="scriptJS">
-			<clobbers target="scriptJS" />
-		</js-module>
-
-		<js-module src="www/nsr_event_cruncher.js" name="nsr_event_cruncher">
-			<clobbers target="nsr_event_cruncher" />
-		</js-module>
-
-		<js-module src="www/nsr.js" name="Neosurance">
-			<clobbers target="Neosurance" />
-		</js-module>
 
 		<edit-config file="AndroidManifest.xml" target="/manifest/uses-sdk" mode="merge">
 			<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="27" />
@@ -171,4 +176,26 @@
 		<source-file src="xml/file_paths.xml" target-dir="res/xml" />
 
     </platform>
+
+
+	<platform name="ios">
+
+		<!-- <framework src="NSR" type="podspec" spec="2.2.3"/> -->
+		<pods-config ios-min-version="9.0" use-frameworks="true">
+		</pods-config>
+
+		<pod name="NSR" />
+
+		<config-file target="config.xml" parent="/*">
+			<feature name="Neosurance">
+				<param name="ios-package" value="Neosurance" />
+			</feature>
+		</config-file>
+
+		<header-file src="src/ios/Neosurance.h" />
+		<source-file src="src/ios/Neosurance.m" />
+		<header-file src="src/ios/NSRSampleWFDelegate.h" />
+		<source-file src="src/ios/NSRSampleWFDelegate.m" />
+	</platform>
+
 </plugin>

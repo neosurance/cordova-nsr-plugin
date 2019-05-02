@@ -34,7 +34,6 @@ var Neosurance = {
 		if (typeof win == "undefined" || win == null)
 			win = function (data) {
 				console.log("NSR_SETUP - Javascipt - OK");
-				Neosurance.startSDKMainActivity();
 			};
 
 		if (typeof fail == "undefined" || fail == null)
@@ -44,7 +43,8 @@ var Neosurance = {
 
 
 		//exec(function(winParam) {}, function(error) {}, "service","action", ["firstArgument", "secondArgument", 42, false]);
-		exec(win, fail, service, "nsr_setup", [obj]); //start_sdk_main_activity
+		var what = (cordova.platformId == "ios") ? "setup" : "nsr_setup";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -60,7 +60,8 @@ var Neosurance = {
 				console.log("NSR_RegisterUser - Javascipt - KO");
 			};
 
-		exec(win, fail, service, "nsr_register_user", [obj]);
+		var what = (cordova.platformId == "ios") ? "registerUser" : "nsr_register_user";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -100,7 +101,8 @@ var Neosurance = {
 			obj = {url: Neosurance.login_url};
 		}
 
-		exec(win, fail, service, "nsr_login_executed", [obj]);
+		var what = (cordova.platformId == "ios") ? "appLogin" : "nsr_login_executed";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -161,7 +163,8 @@ var Neosurance = {
 			typeof Neosurance.payment_url != "undefined" && Neosurance.payment_url != null)
 			obj = {"payment": Neosurance.payment, "payment_url": Neosurance.payment_url};
 
-		exec(win, fail, service, "nsr_payment_executed", [obj]);
+		var what = (cordova.platformId == "ios") ? "appPayment" : "nsr_payment_executed";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -204,7 +207,8 @@ var Neosurance = {
 			};
 		}
 
-		exec(win, fail, service, "nsr_send_event", [obj]);
+		var what = (cordova.platformId == "ios") ? "sendEvent" : "nsr_send_event";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
