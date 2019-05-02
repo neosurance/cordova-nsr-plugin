@@ -21,7 +21,8 @@ var Neosurance = {
 				console.log("initNSRCordovaInterface - Javascipt - KO");
 			};
 
-		exec(win, fail, service, "init_nsr", [obj]);
+		var what = (cordova.platformId == "ios") ? "msg" : "init_nsr";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -41,8 +42,6 @@ var Neosurance = {
 				console.log("NSR_SETUP - Javascipt - KO");
 			};
 
-
-		//exec(function(winParam) {}, function(error) {}, "service","action", ["firstArgument", "secondArgument", 42, false]);
 		var what = (cordova.platformId == "ios") ? "setup" : "nsr_setup";
 		exec(win, fail, service, what, [obj]);
 
@@ -81,7 +80,8 @@ var Neosurance = {
 			obj = {"msg":"nsr_app_login"};
 		}
 
-		exec(win, fail, service, "nsr_app_login", [obj]);
+		var what = (cordova.platformId == "ios") ? "msg" : "nsr_app_login";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -122,7 +122,8 @@ var Neosurance = {
 			obj = {"msg":"nsr_app_payment"};
 		}
 
-		exec(win, fail, service, "nsr_app_payment", [obj]);
+		var what = (cordova.platformId == "ios") ? "msg" : "nsr_app_payment";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -251,7 +252,8 @@ var Neosurance = {
 			};
 		}
 
-		exec(win, fail, service, "nsr_send_action", [obj]);
+		var what = (cordova.platformId == "ios") ? "msg" : "nsr_send_action";
+		exec(win, fail, service, what, [obj]);
 
 	},
 
@@ -267,7 +269,8 @@ var Neosurance = {
 				console.log("NSR_PostMessage - Javascipt - KO");
 			};
 
-		exec(win, fail, service, "nsr_post_message", [obj]);
+		var what = (cordova.platformId == "ios") ? "msg" : "nsr_post_message";
+		exec(win, fail, service, what, [obj]);
 
 	}
 
