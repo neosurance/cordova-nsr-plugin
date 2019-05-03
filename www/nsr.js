@@ -272,7 +272,25 @@ var Neosurance = {
 		var what = (cordova.platformId == "ios") ? "msg" : "nsr_post_message";
 		exec(win, fail, service, what, [obj]);
 
-	}
+	},
+
+	//NSR_SHOWAPP
+	NSR_ShowApp: function (obj, win, fail) {
+
+        if (typeof win == "undefined" || win == null)
+            win = function (data) {
+                console.log("NSR_PostMessage - Javascipt - OK");
+            };
+
+        if (typeof fail == "undefined" || fail == null)
+            fail = function (error) {
+                console.log("NSR_PostMessage - Javascipt - KO");
+            };
+
+        var what = (cordova.platformId == "ios") ? "msg" : "showApp";
+        exec(win, fail, service, what, [obj]);
+
+    }
 
 };
 

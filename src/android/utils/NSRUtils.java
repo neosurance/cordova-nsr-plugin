@@ -11,6 +11,8 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
+
+import org.apache.cordova.CallbackContext;
 import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -231,8 +233,10 @@ public class NSRUtils {
 
     }
 
-    public static synchronized void showUrl(String url, JSONObject params, Context ctx) {
+    public static synchronized void showUrl(String url, JSONObject params, Context ctx, CallbackContext callbackContext) {
         if (NSRUtils.gracefulDegradate()) {
+            if(callbackContext != null)
+                callbackContext.error("NSRUtils - showUrl - gracefulDegradate");
             return;
         }
         try {
@@ -245,6 +249,9 @@ public class NSRUtils {
                 }
             }
 
+            if(callbackContext != null)
+                callbackContext.success(url);
+            
             if (NSR.activityWebView != null) {
                 NSR.activityWebView.navigate(url);
             } else {

@@ -59,6 +59,7 @@ public class NSRCordovaInterface extends CordovaPlugin {
     public static String ACTION_SEND_EVENT = "nsr_send_event";
     public static String ACTION_SEND_ACTION = "nsr_send_action";
     public static String ACTION_POST_MESSAGE  = "nsr_post_message";
+    public static String ACTION_SHOW_APP  = "showApp";
 
     public static String ACTION_START_SDK_MAIN_ACT = "start_sdk_main_activity";
 
@@ -76,6 +77,8 @@ public class NSRCordovaInterface extends CordovaPlugin {
     public static CallbackContext NSR_SendEventCallback = null;
     public static CallbackContext NSR_SendActionCallback = null;
     public static CallbackContext NSR_PostMessageCallback = null;
+    public static CallbackContext NSR_ShowAppCallback = null;
+
     public static CallbackContext NSR_StartSDKActivityCallback = null;
 
     public static NSRCordovaInterface plugin = null;
@@ -149,6 +152,8 @@ public class NSRCordovaInterface extends CordovaPlugin {
             NSR_SendAction(args, callbackContext);
         else if(ACTION_POST_MESSAGE.equals(action))
             NSR_PostMessage(args, callbackContext);
+        else if(ACTION_SHOW_APP.equals(action))
+            NSR_ShowApp(args,callbackContext);
 
         else if(ACTION_START_SDK_MAIN_ACT.equals(action))
             startSDKMainActivity(args,callbackContext);
@@ -431,6 +436,16 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
     }
 
+    //SHOW APP
+    private void NSR_ShowApp(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
+
+        Log.d(TAG,"NSR_ShowApp - NSRCordovaInterface.java - received: showApp <<<");
+
+        NSR_ShowAppCallback = callbackContext;
+
+        NSR.getInstance(ctx).showApp(NSR_ShowAppCallback);
+
+    }
 
     //****************
     /*** HANDLERS ***/
@@ -467,7 +482,7 @@ public class NSRCordovaInterface extends CordovaPlugin {
         Log.d(TAG, "setup ctx: " + ctx);
 
         if(NSRSettings.settings == null)
-            NSRSettings.setNSRSettings();
+            NSRSettings.setNSRSettings(ctx);
 
         NSRSettings.setWorkflowDelegate(new WFDelegate(),ctx);
         NSR.getInstance(ctx).askPermissions(act);

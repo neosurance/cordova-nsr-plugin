@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
+import eu.neosurance.cordova.NSRCordovaInterface;
 import eu.neosurance.utils.NSRUtils;
 
 public class NSRActivityWebView extends AppCompatActivity {
@@ -181,16 +182,16 @@ public class NSRActivityWebView extends AppCompatActivity {
 				}
 				if ("showApp".equals(what)) {
 					if (body.has("params")) {
-						nsr.showApp(body.getJSONObject("params"));
+						nsr.showApp(body.getJSONObject("params"), NSRCordovaInterface.NSR_ShowAppCallback);
 					} else {
-						nsr.showApp();
+						nsr.showApp(NSRCordovaInterface.NSR_ShowAppCallback);
 					}
 				}
 				if ("showUrl".equals(what) && body.has("url")) {
 					if (body.has("params")) {
-						nsr.showUrl(body.getString("url"), body.getJSONObject("params"));
+						nsr.showUrl(body.getString("url"), body.getJSONObject("params"),NSRCordovaInterface.NSR_ShowAppCallback);
 					} else {
-						nsr.showUrl(body.getString("url"));
+						nsr.showUrl(body.getString("url"),NSRCordovaInterface.NSR_ShowAppCallback);
 					}
 				}
 				if ("store".equals(what) && body.has("key") && body.has("data")) {

@@ -171,9 +171,9 @@ public class NSRActivity extends CordovaActivity {
 			if (body.has("action")) {
 				NSR.getInstance(this).sendAction(body.getString("action"), body.getString("code"), body.getString("details"));
 			}
-			if (body.has("test")) {
-				NSR.getInstance(this).showUrl("https://neosuranceprd.s3.eu-west-1.amazonaws.com/apps/02ac1983d6383b035a7d20bdcca25fc3/app.html?code=1PcnUFR8jFNSF8jDOe");
-			}
+			//if (body.has("test")) {
+			//	NSR.getInstance(this).showUrl("https://neosuranceprd.s3.eu-west-1.amazonaws.com/apps/02ac1983d6383b035a7d20bdcca25fc3/app.html?code=1PcnUFR8jFNSF8jDOe");
+			//}
 			if (body.has("what")) {
 				String what = body.getString("what");
 				if ("ready".equals(what)) {

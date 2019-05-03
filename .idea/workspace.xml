@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d8d1971-1a6a-40a4-ba92-6238d93f93ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/www/nsr.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/nsr.js" afterDir="false" />
-    </list>
+    <list default="true" id="6d8d1971-1a6a-40a4-ba92-6238d93f93ee" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -15,15 +13,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/plugin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="192" column="22" lean-forward="true" selection-start-line="192" selection-start-column="22" selection-end-line="192" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -39,8 +28,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/nsr.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="208" column="9" lean-forward="true" selection-start-line="208" selection-start-column="9" selection-end-line="208" selection-end-column="9" />
+            <state relative-caret-position="402">
+              <caret line="205" column="38" selection-start-line="205" selection-start-column="25" selection-end-line="205" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1071">
+              <caret line="612" column="82" lean-forward="true" selection-start-line="612" selection-start-column="82" selection-end-line="612" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/android/sdk/NSR.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="340" column="26" selection-start-line="340" selection-start-column="17" selection-end-line="340" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -101,7 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>NSR_SendEvent</find>
       <find>NSR_AppLogin</find>
       <find>NSR_SetLoginCallback</find>
       <find>NSR_LoginExecuted</find>
@@ -131,6 +137,7 @@
       <find>NSR_PostMessage</find>
       <find>exec(</find>
       <find>what =</find>
+      <find>sendEvent</find>
     </findStrings>
     <replaceStrings>
       <replace>NSRCordovaInterface</replace>
@@ -230,6 +237,26 @@
               <item name="cordova-nsr-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="cordova-nsr-plugin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cordova-nsr-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cordova-nsr-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="cordova" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cordova-nsr-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cordova-nsr-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="sdk" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cordova-nsr-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cordova-nsr-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ios" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -294,16 +321,15 @@
       <workItem from="1555483986908" duration="61854000" />
       <workItem from="1556534999184" duration="4670000" />
       <workItem from="1556619017879" duration="17000" />
-      <workItem from="1556801087199" duration="6945000" />
+      <workItem from="1556801087199" duration="7795000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146225000" />
+    <option name="totallyTimeSpent" value="147075000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="23" width="1598" height="952" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2181357" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -512,13 +538,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/android/sdk/NSR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7875">
-          <caret line="525" column="1" selection-start-line="525" selection-start-column="1" selection-end-line="525" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/android/sdk/NSREventWebView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2805">
@@ -543,13 +562,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="612" column="82" lean-forward="true" selection-start-line="612" selection-start-column="82" selection-end-line="612" selection-end-column="82" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/android/sdk/NSRActivityWebView.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -618,10 +630,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="612" column="82" lean-forward="true" selection-start-line="612" selection-start-column="82" selection-end-line="612" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/android/sdk/NSR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="340" column="26" selection-start-line="340" selection-start-column="17" selection-end-line="340" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/nsr.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="208" column="9" lean-forward="true" selection-start-line="208" selection-start-column="9" selection-end-line="208" selection-end-column="9" />
+        <state relative-caret-position="402">
+          <caret line="205" column="38" selection-start-line="205" selection-start-column="25" selection-end-line="205" selection-end-column="38" />
         </state>
       </provider>
     </entry>

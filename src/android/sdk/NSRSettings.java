@@ -1,11 +1,15 @@
 package eu.neosurance.sdk;
 
+import android.app.Activity;
 import android.content.Context;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Properties;
 
+import eu.neosurance.sdk_ext.NSRActivity;
 import eu.neosurance.sdk_ext.WFDelegate;
 import eu.neosurance.utils.NSRUtils;
 
@@ -23,10 +27,15 @@ public class NSRSettings {
 
 	public static NSRSettings settings = null;
 
-	public static void setNSRSettings(){
+	public static void setNSRSettings(Context ctx){
 
 		if(settings == null){
 			Properties config = new Properties();
+			try {
+				config.load(ctx.getAssets().open("config.properties"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			settings = new NSRSettings();
 			settings.setBaseUrl(config.getProperty("base_url"));
 			settings.setCode(config.getProperty("code"));

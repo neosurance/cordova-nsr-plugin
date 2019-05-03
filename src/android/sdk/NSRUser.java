@@ -327,7 +327,7 @@ public class NSRUser {
 			NSRLog.d("loginExecuted " + ctx);
 			JSONObject params = new JSONObject();
 			params.put("loginExecuted", "yes");
-			NSR.showUrl(url, params);
+			NSR.showUrl(url, params, NSRCordovaInterface.NSR_ShowAppCallback);
 
 			params.put("urlx",url);
 
@@ -349,7 +349,7 @@ public class NSRUser {
 		try {
 			JSONObject params = new JSONObject();
 			params.put("paymentExecuted", paymentInfo.toString());
-			NSR.showUrl(url, params);
+			NSR.showUrl(url, params, NSRCordovaInterface.NSR_ShowAppCallback);
 
 			params.put("urlx",url);
 

@@ -13,6 +13,9 @@ import org.json.JSONObject;
 
 //import eu.neosurance.cordova.NSRCordovaInterface;
 //import eu.neosurance.utils.NSRShake;
+import java.io.IOException;
+import java.util.Properties;
+
 import eu.neosurance.utils.NSRUtils;
 
 public class NSR {
@@ -498,24 +501,28 @@ public class NSR {
 
 	//********** UTILS **********//
 
-	public void showApp() {
-		if (NSRUtils.getAppURL(ctx) != null)
-			showUrl(NSRUtils.getAppURL(ctx), null);
+	public void showApp(CallbackContext callbackContext) {
+
+		String urlTmp = NSRUtils.getAppURL(ctx);
+		if (urlTmp != null)
+			showUrl(urlTmp, null, callbackContext);
 	}
 
-	public void showApp(JSONObject params) {
-		if (NSRUtils.getAppURL(ctx) != null)
-			showUrl(NSRUtils.getAppURL(ctx), params);
+	public void showApp(JSONObject params, CallbackContext callbackContext) {
+
+		String urlTmp = NSRUtils.getAppURL(ctx);
+		if (urlTmp != null)
+			showUrl(urlTmp, params, callbackContext);
 	}
 
-	public static void showUrl(String url) {
+	public static void showUrl(String url, CallbackContext callbackContext) {
 		urlX = url;
-		showUrl(url, null);
+		showUrl(url, null, callbackContext);
 	}
 
-	public static synchronized void showUrl(String url, JSONObject params) {
+	public static synchronized void showUrl(String url, JSONObject params, CallbackContext callbackContext) {
 		urlX = url;
-		NSRUtils.showUrl(url,params,ctx);
+		NSRUtils.showUrl(url,params,ctx, callbackContext);
 	}
 
 	public static Intent makeActivityWebView(String url) throws Exception {
