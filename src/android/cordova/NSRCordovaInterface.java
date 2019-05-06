@@ -358,7 +358,8 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
         } catch (JSONException e) {
             Log.d(TAG,e.getMessage());
-            NSR_SetupCallback.error(e.getMessage());
+            if(NSR_SetupCallback != null)
+                NSR_SetupCallback.error(e.getMessage());
         }
 
     }
@@ -476,7 +477,8 @@ public class NSRCordovaInterface extends CordovaPlugin {
             config.load(ctx.getAssets().open("config.properties"));
         }catch (IOException e) {
             e.printStackTrace();
-            NSR_SetupCallback.error(e.getMessage());
+            if(NSR_SetupCallback != null)
+                NSR_SetupCallback.error(e.getMessage());
         }
 
         Log.d(TAG, "setup ctx: " + ctx);
@@ -512,7 +514,8 @@ public class NSRCordovaInterface extends CordovaPlugin {
             //NSR_RegisterUserCallback.success(data);
         } catch (Exception e) {
             e.printStackTrace();
-            NSR_RegisterUserCallback.error(data);
+            if(NSR_RegisterUserCallback != null)
+                NSR_RegisterUserCallback.error(data);
         }
 
     }

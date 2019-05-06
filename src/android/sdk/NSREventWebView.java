@@ -39,7 +39,7 @@ public class NSREventWebView {
 					webView.getSettings().setAllowFileAccessFromFileURLs(true);
 					webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 					webView.getSettings().setDomStorageEnabled(true);
-					webView.loadUrl("file:///android_asset/eventCruncher.html?ns_lang=IT" + /* NSRUtils.getLang(ctx) + */ "&ns_log=" + NSRUtils.isLogEnabled(ctx));
+					//webView.loadUrl("file:///android_asset/eventCruncher.html?ns_lang=IT" + /* NSRUtils.getLang(ctx) + */ "&ns_log=" + NSRUtils.isLogEnabled(ctx));
 				}
 			});
 

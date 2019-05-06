@@ -138,14 +138,14 @@
 		<source-file src="src/android/utils/NSRUtils.java" target-dir="src/eu/neosurance/utils" />
 		<source-file src="src/android/utils/PackageChangeReceiver.java" target-dir="src/eu/neosurance/utils" />
 
+		<source-file src="assets/config.properties" target-dir="assets" />
+		<!--
 
 		<source-file src="assets/app.html" target-dir="assets" />
 		<source-file src="assets/index.html" target-dir="assets" />
 		<source-file src="assets/style.css" target-dir="assets" />
 		<source-file src="assets/user.svg" target-dir="assets" />
 		<source-file src="assets/script.js" target-dir="assets" />
-
-		<source-file src="assets/config.properties" target-dir="assets" />
 		<source-file src="assets/eventCruncher.html" target-dir="assets" />
 
 		<source-file src="assets/res/cf.js" target-dir="assets/res" />
@@ -170,6 +170,11 @@
 		<source-file src="assets/res/fonts.css" target-dir="assets/res" />
 		<source-file src="assets/res/style.css" target-dir="assets/res" />
 		<source-file src="assets/res/T.js" target-dir="assets/res" />
+
+		-->
+
+
+
 
 		<source-file src="drawable/nsr_logo.png" target-dir="res/drawable" />
 		<source-file src="raw/push.wav" target-dir="res/raw" />

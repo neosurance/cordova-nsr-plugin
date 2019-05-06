@@ -244,6 +244,110 @@ var Neosurance = {
 		var what = (cordova.platformId == "ios") ? "msg" : "nsr_post_message";
 		exec(win, fail, service, what, [obj]);
 
+	},
+
+	nsr_event_cruncher: {
+
+		ns_lang: new URL(document.URL).searchParams.get('ns_lang'),
+
+		ns_log: (new URL(document.URL).searchParams.get('ns_log') == 'true'),
+
+		NSRPostMsg: function (params) {
+
+			//>>> NSR: NSREventWebView eventWebView (name)
+
+			try {
+				if (typeof window.webkit != "undefined" && window.webkit != null)
+					window.webkit.messageHandlers.app.postMessage(params);
+				else
+					Neosurance.NSR_PostMessage(JSON.stringify(params));
+			} catch (err) {
+				Neosurance.NSR_PostMessage(JSON.stringify(params));
+			}
+		},
+
+		NSRlog: function (msg) {
+			if (this.ns_log) {
+				console.log('Neosurance.nsr_event_cruncher.EVC>> ' + msg);
+				this.NSRPostMsg({
+					log: 'Neosurance.nsr_event_cruncher.EVC>> ' + msg
+				});
+			}
+		},
+
+		EVC: {
+
+
+			init: function (win,fail) {
+
+				win({res: '>>> EVC INIT OK'});
+
+				if (localStorage.getItem("nsr_chains") != null)
+					window.eval(localStorage.getItem("nsr_chains"));
+				this.synch();
+			},
+			synch: function () {
+
+				Neosurance.nsr_event_cruncher.NSRlog('eventView Synch!');
+
+				var t = localStorage.getItem("nsr_chainstime");
+				t = t == null ? 0 : parseInt(t, 10);
+
+				var _self = this.innerSynch;
+				Neosurance.nsr_event_cruncher.NSRPostMsg({
+					what: 'callApi',
+					endpoint: 'chains?t=' + t,
+					callBack: _self
+				});
+
+			},
+			innerSynch: function (res) {
+
+				Neosurance.nsr_event_cruncher.NSRlog('eventView innerSynch! ' + JSON.stringify(res));
+
+				if (res.status == 'ok') {
+					Neosurance.nsr_event_cruncher.NSRlog('refresh chains!');
+
+					localStorage.setItem("nsr_chainstime", res.chains_time);
+					localStorage.setItem("nsr_chains", res.chains);
+					window.eval(res.chains);
+				}
+
+			},
+
+			n_pending_evt: 0,
+
+			innerCrunchEvent: function (nsrEvent) {
+
+				Neosurance.nsr_event_cruncher.NSRlog('innerCrunchEvent');
+
+				if (window.crunchEvent) {
+
+					Neosurance.nsr_event_cruncher.NSRlog('cruncher exists');
+					window.crunchEvent(nsrEvent);
+					this.n_pending_evt = 0;
+
+				} else if (this.n_pending_evt++ < 10) {
+
+					Neosurance.nsr_event_cruncher.NSRlog('wait for cruncher ' + this.n_pending_evt);
+
+					setTimeout(function () {
+						this.innerCrunchEvent(JSON.parse(JSON.stringify(nsrEvent)))
+					}, 1000);
+				}
+
+			},
+
+			loaded: function () {
+
+				window.Neosurance.nsr_event_cruncher.NSRlog('continueInitJob');
+				window.Neosurance.nsr_event_cruncher.NSRPostMsg({
+					what: 'continueInitJob'
+				});
+			}
+
+		}
+
 	}
 
 };
