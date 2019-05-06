@@ -85,6 +85,27 @@ var Neosurance = {
 
 	},
 
+	NSR_SendEvent: function (obj, win, fail) {
+
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_SendEvent - Javascipt - OK");
+			};
+
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_SendEvent - Javascipt - KO");
+			};
+
+		if(typeof obj == "undefined" || obj == null){
+			fai("No event found");
+		}
+
+		var what = (cordova.platformId == "ios") ? "sendEvent" : "nsr_send_event";
+		exec(win, fail, service, what, [obj]);
+
+	},
+
 	NSR_LoginExecuted: function (obj, win, fail) {
 
 		if (typeof win == "undefined" || win == null)
@@ -102,6 +123,24 @@ var Neosurance = {
 		}
 
 		var what = (cordova.platformId == "ios") ? "appLogin" : "nsr_login_executed";
+		exec(win, fail, service, what, [obj]);
+
+	},
+
+	//NSR_SHOWAPP
+	NSR_ShowApp: function (obj, win, fail) {
+
+		if (typeof win == "undefined" || win == null)
+			win = function (data) {
+				console.log("NSR_ShowApp - Javascipt - OK");
+			};
+
+		if (typeof fail == "undefined" || fail == null)
+			fail = function (error) {
+				console.log("NSR_ShowApp - Javascipt - KO");
+			};
+
+		var what = (cordova.platformId == "ios") ? "msg" : "showApp";
 		exec(win, fail, service, what, [obj]);
 
 	},
@@ -169,50 +208,6 @@ var Neosurance = {
 
 	},
 
-	NSR_SendEvent: function (obj, win, fail) {
-
-		if (typeof win == "undefined" || win == null)
-			win = function (data) {
-				console.log("NSR_SendEvent - Javascipt - OK");
-			};
-
-		if (typeof fail == "undefined" || fail == null)
-			fail = function (error) {
-				console.log("NSR_SendEvent - Javascipt - KO");
-			};
-
-		if(typeof obj == "undefined" || obj == null){
-			var places = [ {
-				fake : 1,
-				fromCode : 'IT',
-				fromCountry : 'Italia',
-				toCode : 'FR',
-				toCountry : 'Francia'
-			}, {
-				fake : 1,
-				fromCode : 'IT',
-				fromCountry : 'Italia',
-				toCode : 'US',
-				toCountry : 'Stati Uniti'
-			}, {
-				fake : 1,
-				fromCode : 'IT',
-				fromCountry : 'Italia',
-				toCode : 'JP',
-				toCountry : 'Giappone'
-			} ];
-
-			obj = {
-				event : 'countryChange',
-				payload : places[0],
-			};
-		}
-
-		var what = (cordova.platformId == "ios") ? "sendEvent" : "nsr_send_event";
-		exec(win, fail, service, what, [obj]);
-
-	},
-
 	NSR_SendAction: function (obj, win, fail) {
 
 		if (typeof win == "undefined" || win == null)
@@ -272,25 +267,7 @@ var Neosurance = {
 		var what = (cordova.platformId == "ios") ? "msg" : "nsr_post_message";
 		exec(win, fail, service, what, [obj]);
 
-	},
-
-	//NSR_SHOWAPP
-	NSR_ShowApp: function (obj, win, fail) {
-
-        if (typeof win == "undefined" || win == null)
-            win = function (data) {
-                console.log("NSR_PostMessage - Javascipt - OK");
-            };
-
-        if (typeof fail == "undefined" || fail == null)
-            fail = function (error) {
-                console.log("NSR_PostMessage - Javascipt - KO");
-            };
-
-        var what = (cordova.platformId == "ios") ? "msg" : "showApp";
-        exec(win, fail, service, what, [obj]);
-
-    }
+	}
 
 };
 

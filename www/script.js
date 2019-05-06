@@ -71,32 +71,6 @@ var scriptJS = {
 
 	registerUser: function(user, win, fail) {
 
-		/*
-        var user = {
-          code:"mario@rossi.com",
-          email: "mario@rossi.com",
-          firstname: "Mario",
-          lastname: "Rossi",
-          fiscalCode: "RSSMRA85T01F205P",
-          address: "Via Canova 12",
-          city: "Milano",
-          stateProvince: "MI",
-          locals:""
-        };
-
-        user.locals = {
-          email : user.email,
-          firstname : user.firstname,
-          lastname : user.lastname,
-          fiscalCode : user.fiscalCode,
-          address : user.address,
-          city : user.city,
-          stateProvince : user.stateProvince,
-          pushToken : 'fake-push'
-        };
-
-        */
-
 		if(typeof user != "undefined" && user != null)
 			localStorage.setItem('ingdemo_user', JSON.stringify(user));
 
@@ -104,7 +78,7 @@ var scriptJS = {
 	},
 
 
-
+	/*
 	sendEvent: function() {
 
 		var places = [ {
@@ -133,6 +107,7 @@ var scriptJS = {
 		});
 
 	},
+	*/
 
 	loginDone: function() {
 

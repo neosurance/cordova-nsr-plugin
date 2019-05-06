@@ -226,6 +226,17 @@ public class NSRCordovaInterface extends CordovaPlugin {
             NSR_LoginExecutedCallback.error("NSR_LoginExecuted - Empty URL");
     }
 
+    //SHOW APP
+    private void NSR_ShowApp(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
+
+        Log.d(TAG,"NSR_ShowApp - NSRCordovaInterface.java - received: showApp <<<");
+
+        NSR_ShowAppCallback = callbackContext;
+
+        NSR.getInstance(ctx).showApp(NSR_ShowAppCallback);
+
+    }
+
     //NSR_AppPayment => SET APP_PAYMENT CALLBACK
     private void NSR_AppPayment(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
 
@@ -436,16 +447,6 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
     }
 
-    //SHOW APP
-    private void NSR_ShowApp(final CordovaArgs args, final CallbackContext callbackContext) throws JSONException {
-
-        Log.d(TAG,"NSR_ShowApp - NSRCordovaInterface.java - received: showApp <<<");
-
-        NSR_ShowAppCallback = callbackContext;
-
-        NSR.getInstance(ctx).showApp(NSR_ShowAppCallback);
-
-    }
 
     //****************
     /*** HANDLERS ***/
@@ -634,15 +635,3 @@ public class NSRCordovaInterface extends CordovaPlugin {
 
 
 }
-
-/*
-
-    Intent intent = new Intent("WFStuff");
-    intent.putExtra("message", "showPay()");
-    LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent);
-
-    Intent intent = new Intent("WFStuff");
-    intent.putExtra("message", "showLogin()");
-    LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent);
-
-*/
