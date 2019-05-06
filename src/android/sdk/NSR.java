@@ -522,7 +522,10 @@ public class NSR {
 
 	public static synchronized void showUrl(String url, JSONObject params, CallbackContext callbackContext) {
 		urlX = url;
-		NSRUtils.showUrl(url,params,ctx, callbackContext);
+		if(url != null && url.trim().length() > 0)
+			NSRUtils.showUrl(url,params,ctx, callbackContext);
+		else if(callbackContext != null)
+			callbackContext.error("No url found");
 	}
 
 	public static Intent makeActivityWebView(String url) throws Exception {

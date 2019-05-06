@@ -98,7 +98,7 @@ var Neosurance = {
 			};
 
 		if(typeof obj == "undefined" || obj == null){
-			fai("No event found");
+			fail("No event found");
 		}
 
 		var what = (cordova.platformId == "ios") ? "sendEvent" : "nsr_send_event";
@@ -221,30 +221,7 @@ var Neosurance = {
 			};
 
 		if(typeof obj == "undefined" || obj == null){
-			var places = [ {
-				fake : 1,
-				fromCode : 'IT',
-				fromCountry : 'Italia',
-				toCode : 'FR',
-				toCountry : 'Francia'
-			}, {
-				fake : 1,
-				fromCode : 'IT',
-				fromCountry : 'Italia',
-				toCode : 'US',
-				toCountry : 'Stati Uniti'
-			}, {
-				fake : 1,
-				fromCode : 'IT',
-				fromCountry : 'Italia',
-				toCode : 'JP',
-				toCountry : 'Giappone'
-			} ];
-
-			obj = {
-				event : 'countryChange',
-				payload : places[0],
-			};
+			fail("No event found");
 		}
 
 		var what = (cordova.platformId == "ios") ? "msg" : "nsr_send_action";

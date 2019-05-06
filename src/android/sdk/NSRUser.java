@@ -327,13 +327,12 @@ public class NSRUser {
 			NSRLog.d("loginExecuted " + ctx);
 			JSONObject params = new JSONObject();
 			params.put("loginExecuted", "yes");
-			NSR.showUrl(url, params, NSRCordovaInterface.NSR_ShowAppCallback);
-
 			params.put("urlx",url);
 
-			if(NSR_LoginExecutedCallback != null)
+			if(NSR_LoginExecutedCallback != null) {
+				NSR.showUrl(url, params, NSR_LoginExecutedCallback);
 				NSR_LoginExecutedCallback.success(params);
-
+			}
 		} catch (Exception e) {
 			NSRLog.e("loginExecuted", e);
 

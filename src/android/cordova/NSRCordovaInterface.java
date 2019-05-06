@@ -219,7 +219,7 @@ public class NSRCordovaInterface extends CordovaPlugin {
             NSR_LoginExecutedCallback.error(e.getMessage());
         }
 
-        if(urlTmp != null) {
+        if(urlTmp != null && urlTmp.trim().length() > 0) {
             NSR.getInstance(ctx).loginExecuted(urlTmp,NSR_LoginExecutedCallback);
             //NSR_LoginExecutedCallback.success(r);
         }else
@@ -292,9 +292,8 @@ public class NSRCordovaInterface extends CordovaPlugin {
             NSR_AppPaymentCallback.error(e.getMessage());
         }
 
-        if(urlTmp != null) {
+        if(urlTmp != null && urlTmp.trim().length() > 0) {
             NSR.getInstance(ctx).paymentExecuted(payment,urlTmp,NSR_PaymentExecutedCallback);
-            //NSR_PaymentExecutedCallback.success(payment);
         }else
             NSR_PaymentExecutedCallback.error("NSR_PaymentExecutedCallback - Empty URL");
 

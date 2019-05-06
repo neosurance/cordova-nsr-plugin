@@ -29,7 +29,7 @@ var scriptJS = {
 			what : 'ready'
 		});
 
-		if (localStorage.getItem('ingdemo_user')) {
+		if (localStorage.getItem('ingdemo_user') != null) {
 
 			var user = JSON.parse(localStorage.getItem('ingdemo_user'));
 
@@ -78,7 +78,7 @@ var scriptJS = {
 	},
 
 
-	/*
+
 	sendEvent: function() {
 
 		var places = [ {
@@ -107,7 +107,7 @@ var scriptJS = {
 		});
 
 	},
-	*/
+
 
 	loginDone: function() {
 
