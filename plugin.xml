@@ -139,43 +139,7 @@
 		<source-file src="src/android/utils/PackageChangeReceiver.java" target-dir="src/eu/neosurance/utils" />
 
 		<source-file src="assets/config.properties" target-dir="assets" />
-		<!--
-
-		<source-file src="assets/app.html" target-dir="assets" />
-		<source-file src="assets/index.html" target-dir="assets" />
-		<source-file src="assets/style.css" target-dir="assets" />
-		<source-file src="assets/user.svg" target-dir="assets" />
-		<source-file src="assets/script.js" target-dir="assets" />
-		<source-file src="assets/eventCruncher.html" target-dir="assets" />
-
-		<source-file src="assets/res/cf.js" target-dir="assets/res" />
-		<source-file src="assets/res/es100.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es100x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es200.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es200x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es300.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es300x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es400.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es400x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es500.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es500x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es600.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es600x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es700.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es700x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es800.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es800x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es900.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/es900x.woff2" target-dir="assets/res" />
-		<source-file src="assets/res/fonts.css" target-dir="assets/res" />
-		<source-file src="assets/res/style.css" target-dir="assets/res" />
-		<source-file src="assets/res/T.js" target-dir="assets/res" />
-
-		-->
-
-
-
-
+		
 		<source-file src="drawable/nsr_logo.png" target-dir="res/drawable" />
 		<source-file src="raw/push.wav" target-dir="res/raw" />
 		<source-file src="xml/file_paths.xml" target-dir="res/xml" />

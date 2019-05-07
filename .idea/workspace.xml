@@ -2,11 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d8d1971-1a6a-40a4-ba92-6238d93f93ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/app.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/eventCruncher.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/T.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/cf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es100.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es100x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es200.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es200x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es300.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es300x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es400.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es400x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es500.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es500x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es600.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es600x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es700.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es700x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es800.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es800x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es900.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/es900x.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/fonts.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/res/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/user.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/android/sdk/NSREventWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/android/sdk/NSREventWebView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/nsr.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/nsr.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -37,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/nsr.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="254">
@@ -73,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1140">
-              <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state relative-caret-position="256">
+              <caret line="141" column="8" selection-start-line="141" selection-start-column="8" selection-end-line="141" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -109,13 +133,13 @@
       <find>wf_delegate</find>
       <find>init</find>
       <find>showApp</find>
-      <find>NSR_SetupCallback.error</find>
       <find>nsr_event_cruncher</find>
       <find>Neosurance.</find>
       <find>.nsr_event_cruncher</find>
       <find>Neosurance.nsr_event_cruncher</find>
       <find>Neosurance.nsr_event_cruncher.</find>
       <find>loaded</find>
+      <find>NSR_SetupCallback.error</find>
     </findStrings>
     <replaceStrings>
       <replace>NSRCordovaInterface</replace>
@@ -170,10 +194,10 @@
         <option value="$PROJECT_DIR$/src/android/sdk/NSRUser.java" />
         <option value="$PROJECT_DIR$/www/script.js" />
         <option value="$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java" />
-        <option value="$PROJECT_DIR$/plugin.xml" />
         <option value="$PROJECT_DIR$/www/nsr_event_cruncher.js" />
         <option value="$PROJECT_DIR$/src/android/sdk/NSREventWebView.java" />
         <option value="$PROJECT_DIR$/www/nsr.js" />
+        <option value="$PROJECT_DIR$/plugin.xml" />
       </list>
     </option>
   </component>
@@ -294,12 +318,12 @@
       <workItem from="1556534999184" duration="4670000" />
       <workItem from="1556619017879" duration="17000" />
       <workItem from="1556801087199" duration="7795000" />
-      <workItem from="1557128385133" duration="8898000" />
+      <workItem from="1557128385133" duration="9271000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155973000" />
+    <option name="totallyTimeSpent" value="156346000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="23" width="1598" height="952" extended-state="0" />
@@ -582,20 +606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1140">
-          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-215">
-          <caret line="361" column="16" selection-start-line="361" selection-start-column="16" selection-end-line="361" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/nsr_event_cruncher.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -621,6 +631,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
           <caret line="300" column="19" selection-start-line="300" selection-start-column="19" selection-end-line="300" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-215">
+          <caret line="361" column="16" selection-start-line="361" selection-start-column="16" selection-end-line="361" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="141" column="8" selection-start-line="141" selection-start-column="8" selection-end-line="141" selection-end-column="8" />
         </state>
       </provider>
     </entry>
