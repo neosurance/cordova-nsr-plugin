@@ -85,8 +85,19 @@
 
  - (void)setWorkflowDelegate:(CDVInvokedUrlCommand*)command {
 
+     CDVPluginResult* pluginResult = nil;
      self.delegate = [[NSRSampleWFDelegate alloc] init];
-   [[NSR sharedInstance] setWorkflowDelegate:self.delegate];
+
+     if(self.delegate != nil){
+         [[NSR sharedInstance] setWorkflowDelegate:self.delegate];
+         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+         if(command.callbackId != nil)
+             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+     }else{
+         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+         if(command.callbackId != nil)
+             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+     }
 
  }
 
@@ -135,7 +146,18 @@
 
 - (void)showApp:(CDVInvokedUrlCommand*)command
 {
-    [[NSR sharedInstance] showApp];
+    CDVPluginResult* pluginResult = nil;
+    if([[NSR sharedInstance] getAppUrl] != nil){
+        [[NSR sharedInstance] showApp];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }else{
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+
 }
 
 - (void)sendEvent:(CDVInvokedUrlCommand*)command
@@ -180,5 +202,74 @@
 
     [[NSR sharedInstance] sendEvent:val payload:payload];
 }
+
+- (void)login:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+
+    if(command.callbackId != nil){
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:command.callbackId];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }else{
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
+
+- (void)appLogin:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+
+    NSString* arg = [command.arguments objectAtIndex:0];
+    NSString* url = [arg valueForKey :@"url" ];
+
+    if(url.length > 0){
+        [[NSR sharedInstance] loginExecuted:url];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }else{
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
+
+- (void)appPayment:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+
+    if(command.callbackId != nil){
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:command.callbackId];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }else{
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
+
+- (void)appPaymentExecuted:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult = nil;
+
+    NSString* arg = [command.arguments objectAtIndex:0];
+    NSString* url = [arg valueForKey :@"url" ];
+    NSDictionary* paymentInfo = [arg valueForKey :@"paymentInfo" ];
+
+    if(url != nil && url.length > 0 && paymentInfo != nil){
+
+        [[NSR sharedInstance] paymentExecuted:paymentInfo url:url];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }else{
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        if(command.callbackId != nil)
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
+
 @end
 

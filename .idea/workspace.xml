@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d8d1971-1a6a-40a4-ba92-6238d93f93ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSR.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSR.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSR.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSR.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRControllerWebView.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRControllerWebView.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRControllerWebView.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRControllerWebView.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRDefaultSecurityDelegate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRDefaultSecurityDelegate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRDefaultSecurityDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRDefaultSecurityDelegate.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSREventWebView.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSREventWebView.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSREventWebView.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSREventWebView.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRSampleWFDelegate.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRSampleWFDelegate.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRUser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRUser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRUser.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRUser.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRWebView.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRWebView.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/NSRWebView.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/NSRWebView.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ios/Neosurance.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/Neosurance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ios/Neosurance.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/Neosurance.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/nsr.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/nsr.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/nsr.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="288" column="89" selection-start-line="288" selection-start-column="89" selection-end-line="288" selection-end-column="89" />
+            <state relative-caret-position="605">
+              <caret line="205" column="70" selection-start-line="205" selection-start-column="52" selection-end-line="205" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -56,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="153" column="21" lean-forward="true" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
+            <state relative-caret-position="255">
+              <caret line="153" column="21" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -91,17 +78,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ios/Neosurance.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2760">
-              <caret line="184" selection-start-line="184" selection-end-line="184" />
+            <state relative-caret-position="802">
+              <caret line="275" selection-start-line="275" selection-end-line="275" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ios/NSR.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="23" column="37" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+              <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -110,8 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ios</find>
-      <find>featu</find>
       <find>startSDKMainActivity</find>
       <find>exec(</find>
       <find>what =</find>
@@ -137,9 +122,11 @@
       <find>postMessage</find>
       <find>NSR_PostMessage</find>
       <find>NSR_SetupCallback.error</find>
-      <find>NSRPostMsg</find>
-      <find>res</find>
       <find>&lt;NSR/NSR</find>
+      <find>res</find>
+      <find>NSRPostMsg</find>
+      <find>NSR_SetLoginCallback</find>
+      <find>NSR_AppPayment</find>
     </findStrings>
     <replaceStrings>
       <replace>NSRCordovaInterface</replace>
@@ -196,12 +183,12 @@
         <option value="$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java" />
         <option value="$PROJECT_DIR$/www/nsr_event_cruncher.js" />
         <option value="$PROJECT_DIR$/src/android/sdk/NSREventWebView.java" />
-        <option value="$PROJECT_DIR$/src/ios/Neosurance.m" />
-        <option value="$PROJECT_DIR$/www/nsr.js" />
         <option value="$PROJECT_DIR$/src/ios/NSR.m" />
         <option value="$PROJECT_DIR$/plugin.xml" />
         <option value="$PROJECT_DIR$/src/ios/NSRSampleWFDelegate.h" />
         <option value="$PROJECT_DIR$/src/ios/Neosurance.h" />
+        <option value="$PROJECT_DIR$/www/nsr.js" />
+        <option value="$PROJECT_DIR$/src/ios/Neosurance.m" />
       </list>
     </option>
   </component>
@@ -312,12 +299,12 @@
       <workItem from="1556534999184" duration="4670000" />
       <workItem from="1556619017879" duration="17000" />
       <workItem from="1556801087199" duration="7795000" />
-      <workItem from="1557128385133" duration="21093000" />
+      <workItem from="1557128385133" duration="23131000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168168000" />
+    <option name="totallyTimeSpent" value="170206000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="23" width="1598" height="952" extended-state="0" />
@@ -599,13 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/nsr.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="288" column="89" selection-start-line="288" selection-start-column="89" selection-end-line="288" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/xml/file_paths.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -630,24 +610,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="153" column="21" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/nsr.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="205" column="70" selection-start-line="205" selection-start-column="52" selection-end-line="205" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ios/Neosurance.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2760">
-          <caret line="184" selection-start-line="184" selection-end-line="184" />
+        <state relative-caret-position="802">
+          <caret line="275" selection-start-line="275" selection-end-line="275" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ios/NSR.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="23" column="37" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="153" column="21" lean-forward="true" selection-start-line="153" selection-start-column="21" selection-end-line="153" selection-end-column="21" />
+          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
         </state>
       </provider>
     </entry>

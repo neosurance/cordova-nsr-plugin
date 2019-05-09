@@ -203,7 +203,7 @@ var Neosurance = {
 			typeof Neosurance.payment_url != "undefined" && Neosurance.payment_url != null)
 			obj = {"payment": Neosurance.payment, "payment_url": Neosurance.payment_url};
 
-		var what = (cordova.platformId == "ios") ? "appPayment" : "nsr_payment_executed";
+		var what = (cordova.platformId == "ios") ? "appPaymentExecuted" : "nsr_payment_executed";
 		exec(win, fail, service, what, [obj]);
 
 	},
