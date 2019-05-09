@@ -19,7 +19,7 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 #import <Cordova/CDVPlugin.h>
-#import <NSR/NSR.h>
+#import "NSR.h"
 #import "NSRSampleWFDelegate.h"
 
 @interface Neosurance : CDVPlugin

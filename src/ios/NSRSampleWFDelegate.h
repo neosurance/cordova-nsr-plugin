@@ -18,7 +18,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <NSR/NSR.h>
+#import "NSR.h"
 #import <Cordova/CDVPlugin.h>
 
 @interface NSRSampleWFDelegate : NSObject<NSRWorkflowDelegate>
