@@ -153,7 +153,7 @@
 		<pods-config ios-min-version="9.0" use-frameworks="true">
 		</pods-config>
 
-		<!--pod name="NSR" /-->
+		<pod name="NSR" />
 
 		<config-file target="config.xml" parent="/*">
 			<feature name="Neosurance">
