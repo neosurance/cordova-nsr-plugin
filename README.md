@@ -58,7 +58,7 @@ Neosurance.NSR_RegisterUser({
 A notification will be detected by the NSR Event Cruncher:
 
 ```js
-nsr_event_cruncher.EVC.init(successCallback, failureCallback);
+Neosurance.nsr_event_cruncher.EVC.init(successCallback, failureCallback);
 ```
 
 ## Installation
