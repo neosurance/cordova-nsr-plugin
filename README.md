@@ -305,7 +305,7 @@ Or install from local source:
     Neosurance.NSR_SetLoginCallback(null, successCallback, failureCallback);
    ```
 
-5. ### Send Trial Event (ex. 'changeCountry')    
+5. ### Send Trial Event   
 
     ```js
     scriptJS.sendEvent({event:'trg1',payload:{fake:1}}, successCallback, failureCallback);
