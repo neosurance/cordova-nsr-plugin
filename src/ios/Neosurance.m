@@ -255,20 +255,26 @@
     CDVPluginResult* pluginResult = nil;
 
     NSString* arg = [command.arguments objectAtIndex:0];
-    NSString* url = [arg valueForKey :@"url" ];
-    NSDictionary* paymentInfo = [arg valueForKey :@"paymentInfo" ];
+    NSString* payment = [arg valueForKey :@"payment" ];
+    NSString* paymentUrl = [arg valueForKey :@"paymentUrl" ];
 
-    if(url != nil && url.length > 0 && paymentInfo != nil){
+    if(payment != nil && paymentUrl != nil && paymentUrl.length > 0){
 
-        [[NSR sharedInstance] paymentExecuted:paymentInfo url:url];
+        NSMutableDictionary* paymentDict = [[NSMutableDictionary alloc] init];
+        [paymentDict setObject:payment  forKey:@"payment"];
+        [paymentDict setObject:paymentUrl  forKey:@"paymentUrl"];
+        [[NSR sharedInstance] paymentExecuted:paymentDict url:paymentUrl];
+
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         if(command.callbackId != nil)
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
     }else{
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
         if(command.callbackId != nil)
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
+
 }
 
 @end

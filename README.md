@@ -31,15 +31,26 @@ The plugin allows hybrid cordova applications to use Neosurance SDK.
 
 ```js
 Neosurance.NSR_RegisterUser({
-    code:"mario.rossi",
-    email: "mario.rossi@neosurance.eu",
+  code:"mario@rossi.com",
+  email: "mario@rossi.com",
+  firstname: "Mario",
+  lastname: "Rossi",
+  country:"Italia",
+  fiscalCode: "RSSMRA85T01F205P",
+  address: "Via Canova 12",
+  city: "Milano",
+  stateProvince: "MI",
+  locals:{
+    email: "mario@rossi.com",
     firstname: "Mario",
     lastname: "Rossi",
-    fiscalCode: "MRXRSS92T01D850W",
+    fiscalCode: "RSSMRA85T01F205P",
     address: "Via Canova 12",
     city: "Milano",
-    stateProvince: "MI"
-})
+    stateProvince: "MI",
+    pushToken : "fake-push"
+  }
+}, successCallback, failureCallback);
 ```
 
 ## NSREventCruncher
@@ -47,7 +58,7 @@ Neosurance.NSR_RegisterUser({
 A notification will be detected by the NSR Event Cruncher:
 
 ```js
-nsr_event_cruncher.EVC.init()
+nsr_event_cruncher.EVC.init(successCallback, failureCallback);
 ```
 
 ## Installation
@@ -63,7 +74,7 @@ Or install from local source:
     $ ionic cordova plugin add <path> 
 
 
-## After Installation
+## Android: After Installation
 
 1. Inside your **AndroidManifest.xml** be sure to have the following permissions:
 
@@ -195,77 +206,133 @@ Or install from local source:
                 (...)
        ```
 
+## iOS: After Installation
+
+1. Inside your file.plist be sure to have the following permissions:
+
+	```xml
+	NSRIonic_v4-Info.plist
+
+    - Privacy - Location Always and When In Use Usage Description 	[Always and when in use...]
+    - Privacy - Location Always Usage Description					[Always...]
+    - Privacy - Location When In Use Usage Description				[When in use...]
+    - Privacy - Motion Usage Description							[Motion…]
+	```
+	
+2. Inside your Podfile be sure to have the following:
+
+	```
+	platform :ios, '9.0'
+	use_frameworks!
+	source 'https://github.com/CocoaPods/Specs.git'
+	target 'YOUR_APP_NAME' do
+	pod 'AFNetworking', '~> 3.0'
+	end
+	```
+	then use this command from your terminal in the Podfile and Xcode project directory:
+	```
+    pod install
+    ```
+
+3. Inside your XCode Capabilities be sure to have the following:
+
+	```xml
+	Background Modes ON
+
+    - Location updates
+    - Bacground fetch
+    - Remote notifications
+	```
+
 ## Usage
 
-1. ### setup
+1. ### Setup
 	Earlier in your Ionic Cordova application startup flow using
-
+	
+	Android
+	
     ```js
-    Neosurance.NSR_Setup(null, win, fail);
+    Neosurance.NSR_Setup(null, successCallback, failureCallback);
     ```
     
-2. ### User Registration    
-    ```js
-    var user = {
-          code:"mario@rossi.com",
-          email: "mario@rossi.com",
-          firstname: "Mario",
-          lastname: "Rossi",
-          fiscalCode: "RSSMRA85T01F205P",
-          address: "Via Canova 12",
-          city: "Milano",
-          stateProvince: "MI",
-          locals:{}
-        };
+    iOS
     
-    user.locals = {
-      email : user.email,
-      firstname : user.firstname,
-      lastname : user.lastname,
-      fiscalCode : user.fiscalCode,
-      address : user.address,
-      city : user.city,
-      stateProvince : user.stateProvince,
-      pushToken : 'fake-push'
+    ```js
+    var params = {
+       "code":"bppb",
+       "base_url":"https://sandboxng.neosurancecloud.net/api/v1.0/",
+       "secret_key": "pass",
+       "dev_mode": true
     };
-     
-    Neosurance.NSR_RegisterUser(user, win, fail);
-    ```
 
-3. ### enable eventCruncher
+    Neosurance.NSR_Setup(params, successCallback, failureCallback);
+   ```
+   
+2. ### Init eventCruncher
     
     ```js
-    nsr_event_cruncher.EVC.init(win, fail);
+    Neosurance.nsr_event_cruncher.EVC.init(successCallback, failureCallback);
+    ```   
+        
+3. ### User Registration    
+    ```js
+    Neosurance.NSR_RegisterUser({
+     code:"mario@rossi.com",
+     email: "mario@rossi.com",
+     firstname: "Mario",
+     lastname: "Rossi",
+     country:"Italia",
+     fiscalCode: "RSSMRA85T01F205P",
+     address: "Via Canova 12",
+     city: "Milano",
+     stateProvince: "MI",
+     locals:{
+       email: "mario@rossi.com",
+       firstname: "Mario",
+       lastname: "Rossi",
+       fiscalCode: "RSSMRA85T01F205P",
+       address: "Via Canova 12",
+       city: "Milano",
+       stateProvince: "MI",
+       pushToken : "fake-push"
+     }
+   }, successCallback, failureCallback);
     ```
     
 4. ### Set Login Callbacks
     
     ```js
-    Neosurance.NSR_SetLoginCallback(null, win, fail);
+    Neosurance.NSR_SetLoginCallback(null, successCallback, failureCallback);
    ```
 
 5. ### Send Trial Event (ex. 'changeCountry')    
 
     ```js
-    scriptJS.sendEvent(null, win, fail);
+    scriptJS.sendEvent({event:'trg1',payload:{fake:1}}, successCallback, failureCallback);
      ```
      
 6. ### If Login was ok   
   
      ```js
-     Neosurance.NSR_LoginExecuted(null, win, fail);NSR_AppPayment
+     Neosurance.NSR_LoginExecuted(null, successCallback, failureCallback);
+     ```
+
+7. ### Show Payments List   
+  
+     ```js
+     Neosurance.NSR_ShowApp(null, successCallback, failureCallback);
      ```
      
-7. ### Set Payment Callbacks 
+8. ### Set Payment Callbacks 
 
      ```js
-     Neosurance.NSR_AppPayment(null, win, fail);
+     Neosurance.NSR_AppPayment(null, successCallback, failureCallback);
      ```
      
 7. ### If Payment was ok
      
      ```js
-     Neosurance.NSR_PaymentExecuted(null, win, fail);
+     Neosurance.NSR_PaymentExecuted(null, successCallback, failureCallback);
      ```
      
 8. ### For further information see NSR SDK Docs
@@ -274,28 +341,6 @@ Or install from local source:
 	
 	...It's *mandatory* that your **securityDelegate** implements the **default constructor** and must be excluded from any obfuscation (ProGuard).  
 	Then use the ***setSecurityDelegate*** method...
-	
-## RegisterUser  
-	When the user is recognized by your application, register him in our *SDK* creating an **NSRUser**  
-	The **NSRUser** has the following fields:
-	
-	**code**: the user code in your system (can be equals to the email)  
-	**email**: the email is the real primary key  
-	**firstname** *optional*  
-	**lastname** *optional*  
-	**mobile** *optional*  
-	**fiscalCode** *optional*  
-	**gender** *optional*  
-	**birthday** *optional*  
-	**address** *optional*  
-	**zipCode** *optional*  
-	**city** *optional*  
-	**stateProvince** *optional*  
-	**country** *optional*  
-	**extra** *optional*: will be shared with us  
-	**locals** *optional*: will not be exposed outside the device  
-
-	(Take a look at previous 'Usage' -> 2. User Registration)
 
 ## Author
 

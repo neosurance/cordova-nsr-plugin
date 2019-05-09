@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d8d1971-1a6a-40a4-ba92-6238d93f93ee" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ios/Neosurance.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/ios/Neosurance.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/nsr.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/nsr.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,10 +16,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="369">
+                <caret line="331" column="14" selection-start-line="331" selection-start-column="14" selection-end-line="331" selection-end-column="14" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/nsr.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
+            <state relative-caret-position="2821">
               <caret line="205" column="70" selection-start-line="205" selection-start-column="52" selection-end-line="205" selection-end-column="70" />
             </state>
           </provider>
@@ -37,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="-509">
               <caret line="17" column="67" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
             </state>
           </provider>
@@ -78,13 +90,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ios/Neosurance.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="802">
-              <caret line="275" selection-start-line="275" selection-end-line="275" />
+            <state relative-caret-position="742">
+              <caret line="281" selection-start-line="281" selection-end-line="281" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ios/NSR.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
@@ -97,7 +109,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>startSDKMainActivity</find>
       <find>exec(</find>
       <find>what =</find>
       <find>getById</find>
@@ -127,6 +138,7 @@
       <find>NSRPostMsg</find>
       <find>NSR_SetLoginCallback</find>
       <find>NSR_AppPayment</find>
+      <find>fail</find>
     </findStrings>
     <replaceStrings>
       <replace>NSRCordovaInterface</replace>
@@ -174,7 +186,6 @@
         <option value="$PROJECT_DIR$/src/android/utils/NSRUtils.java" />
         <option value="$PROJECT_DIR$/src/android/sdk/NSRActivityWebView.java" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/assets/config.properties" />
         <option value="$PROJECT_DIR$/src/android/sdk/NSRFences.java" />
         <option value="$PROJECT_DIR$/src/android/sdk/NSR.java" />
@@ -189,6 +200,7 @@
         <option value="$PROJECT_DIR$/src/ios/Neosurance.h" />
         <option value="$PROJECT_DIR$/www/nsr.js" />
         <option value="$PROJECT_DIR$/src/ios/Neosurance.m" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -299,12 +311,12 @@
       <workItem from="1556534999184" duration="4670000" />
       <workItem from="1556619017879" duration="17000" />
       <workItem from="1556801087199" duration="7795000" />
-      <workItem from="1557128385133" duration="23131000" />
+      <workItem from="1557128385133" duration="26071000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170206000" />
+    <option name="totallyTimeSpent" value="173146000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="23" width="1598" height="952" extended-state="0" />
@@ -503,16 +515,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="105">
-            <caret line="7" column="67" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="67" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/android/sdk/NSRFences.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
@@ -565,13 +567,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="67" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/android/cordova/NSRCordovaInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1287">
@@ -617,24 +612,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ios/NSR.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/nsr.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
+        <state relative-caret-position="2821">
           <caret line="205" column="70" selection-start-line="205" selection-start-column="52" selection-end-line="205" selection-end-column="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ios/Neosurance.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
-          <caret line="275" selection-start-line="275" selection-end-line="275" />
+        <state relative-caret-position="742">
+          <caret line="281" selection-start-line="281" selection-end-line="281" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ios/NSR.m">
+    <entry file="file://$PROJECT_DIR$/www/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+        <state relative-caret-position="-509">
+          <caret line="17" column="67" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="369">
+            <caret line="331" column="14" selection-start-line="331" selection-start-column="14" selection-end-line="331" selection-end-column="14" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
