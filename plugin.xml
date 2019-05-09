@@ -150,10 +150,9 @@
 	<platform name="ios">
 
 		<!-- <framework src="NSR" type="podspec" spec="2.2.3"/> -->
-		<pods-config ios-min-version="9.0" use-frameworks="true">
-		</pods-config>
-
-		<pod name="NSR" />
+		<!--pods-config ios-min-version="9.0" use-frameworks="true">
+		</pods-config-->
+		<!--pod name="NSR" /-->
 
 		<config-file target="config.xml" parent="/*">
 			<feature name="Neosurance">
@@ -165,6 +164,24 @@
 		<source-file src="src/ios/Neosurance.m" />
 		<header-file src="src/ios/NSRSampleWFDelegate.h" />
 		<source-file src="src/ios/NSRSampleWFDelegate.m" />
+
+		<header-file src="src/ios/NSR.h" />
+		<source-file src="src/ios/NSR.m" />
+		<header-file src="src/ios/NSRControllerWebView.h" />
+		<source-file src="src/ios/NSRControllerWebView.m" />
+		<header-file src="src/ios/NSRDefaultSecurityDelegate.h" />
+		<source-file src="src/ios/NSRDefaultSecurityDelegate.m" />
+		<header-file src="src/ios/NSREventWebView.h" />
+		<source-file src="src/ios/NSREventWebView.m" />
+		<header-file src="src/ios/NSRUser.h" />
+		<source-file src="src/ios/NSRUser.m" />
+		<header-file src="src/ios/NSRWebView.h" />
+		<source-file src="src/ios/NSRWebView.m" />
+
+		<source-file src="assets/config.properties" target-dir="assets" />
+		<source-file src="drawable/nsr_logo.png" target-dir="assets" />
+		<source-file src="raw/push.wav" target-dir="assets" />
+
 	</platform>
 
 </plugin>
