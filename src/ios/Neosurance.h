@@ -16,8 +16,8 @@
  specific language governing permissions and limitations
  under the License.
  */
-
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
 #import <Cordova/CDVPlugin.h>
 #import <NSR/NSR.h>
 #import "NSRSampleWFDelegate.h"

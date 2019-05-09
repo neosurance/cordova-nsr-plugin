@@ -21,7 +21,7 @@ var Neosurance = {
 				console.log("initNSRCordovaInterface - Javascipt - KO");
 			};
 
-		var what = (cordova.platformId == "ios") ? "msg" : "init_nsr";
+		var what = (cordova.platformId == "ios") ? "setup" : "init_nsr";
 		exec(win, fail, service, what, [obj]);
 
 	},
@@ -77,10 +77,10 @@ var Neosurance = {
 			};
 
 		if(obj == "undefined" || obj == null){
-			obj = {"msg":"nsr_app_login"};
+			obj = {"int": 1, "message": "nsr_app_login"};
 		}
 
-		var what = (cordova.platformId == "ios") ? "msg" : "nsr_app_login";
+		var what = (cordova.platformId == "ios") ? "login" : "nsr_app_login";
 		exec(win, fail, service, what, [obj]);
 
 	},
@@ -140,7 +140,7 @@ var Neosurance = {
 				console.log("NSR_ShowApp - Javascipt - KO");
 			};
 
-		var what = (cordova.platformId == "ios") ? "msg" : "showApp";
+		var what = (cordova.platformId == "ios") ? "showApp" : "showApp";
 		exec(win, fail, service, what, [obj]);
 
 	},
@@ -158,10 +158,10 @@ var Neosurance = {
 			};
 
 		if(obj == "undefined" || obj == null){
-			obj = {"msg":"nsr_app_payment"};
+			obj = {"int": 1, "message": "nsr_app_payment"};
 		}
 
-		var what = (cordova.platformId == "ios") ? "msg" : "nsr_app_payment";
+		var what = (cordova.platformId == "ios") ? "appPayment" : "nsr_app_payment";
 		exec(win, fail, service, what, [obj]);
 
 	},
@@ -224,7 +224,7 @@ var Neosurance = {
 			fail("No event found");
 		}
 
-		var what = (cordova.platformId == "ios") ? "msg" : "nsr_send_action";
+		var what = (cordova.platformId == "ios") ? "sendAction" : "nsr_send_action";
 		exec(win, fail, service, what, [obj]);
 
 	},
@@ -241,7 +241,7 @@ var Neosurance = {
 				console.log("NSR_PostMessage - Javascipt - KO");
 			};
 
-		var what = (cordova.platformId == "ios") ? "msg" : "nsr_post_message";
+		var what = (cordova.platformId == "ios") ? "postMessage" : "nsr_post_message";
 		exec(win, fail, service, what, [obj]);
 
 	},
@@ -280,11 +280,16 @@ var Neosurance = {
 
 			init: function (win,fail) {
 
-				win({res: '>>> EVC INIT OK'});
-
 				if (localStorage.getItem("nsr_chains") != null)
 					window.eval(localStorage.getItem("nsr_chains"));
 				this.synch();
+
+
+				if(cordova.platformId == "ios")
+					exec(win, fail, 'Neosurance', 'setWorkflowDelegate', [{"int": 1, "cmd": "setWorkflowDelegate"}]);
+				else
+					win({res: '>>> EVC INIT OK'});
+
 			},
 			synch: function () {
 

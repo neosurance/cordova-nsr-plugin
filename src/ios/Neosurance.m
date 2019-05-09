@@ -31,36 +31,60 @@
 @implementation Neosurance
 
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler   API_AVAILABLE(ios(10.0)){
+    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
+}
 
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler   API_AVAILABLE(ios(10.0)){
+    if(![[NSR sharedInstance] forwardNotification:response]) {
+    }
+    completionHandler();
+}
 
  - (void)setup:(CDVInvokedUrlCommand*)command
     {
-    
+
         CDVPluginResult* pluginResult = nil;
         NSString* myarg = [command.arguments objectAtIndex:0];
 
+        if (@available(iOS 10.0, *)) {
+            UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+            center.delegate = self;
+
+            UNAuthorizationOptions options = UNAuthorizationOptionAlert | UNAuthorizationOptionSound;
+            [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError* _Nullable error) {}];
+
+        }
+
         @try {
             NSMutableDictionary* settings = [[NSMutableDictionary alloc] init];
-            [settings setObject: [myarg valueForKey :@"base_url" ] forKey:@"base_url"];
-            [settings setObject:[myarg valueForKey :@"code" ] forKey:@"code"];
-            [settings setObject:[myarg valueForKey :@"secret_key" ] forKey:@"secret_key"];
-            [settings setObject:[myarg valueForKey :@"dev_mode" ] forKey:@"dev_mode"];
+
+            NSString* baseUrl = [myarg valueForKey :@"base_url"];
+            NSString* code = [myarg valueForKey :@"code"];
+            NSString* secret_key = [myarg valueForKey :@"secret_key"];
+            NSString* dev_mode = [myarg valueForKey :@"dev_mode"];
+            [settings setObject:baseUrl  forKey:@"base_url"];
+            [settings setObject:code forKey:@"code"];
+            [settings setObject:secret_key forKey:@"secret_key"];
+            [settings setObject:dev_mode forKey:@"dev_mode"];
+
             [settings setObject:[NSNumber numberWithInt:UIStatusBarStyleDefault] forKey:@"bar_style"];
             [settings setObject:[UIColor colorWithRed:0.2 green:1 blue:1 alpha:1] forKey:@"back_color"];
-            [[NSR sharedInstance] setup:settings];
-            
+            id res = [NSR sharedInstance];
+            [res setup:settings];
+
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         }
         @catch (NSException * e) {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-        
-        
+
+
     }
 
  - (void)setWorkflowDelegate:(CDVInvokedUrlCommand*)command {
- 
+
      self.delegate = [[NSRSampleWFDelegate alloc] init];
    [[NSR sharedInstance] setWorkflowDelegate:self.delegate];
 
@@ -68,12 +92,12 @@
 
  - (void)registerUser:(CDVInvokedUrlCommand*)command
     {
-    
+
         CDVPluginResult* pluginResult = nil;
         NSString* myarg = [command.arguments objectAtIndex:0];
 
         @try {
-            
+
             NSRUser* user = [[NSRUser alloc] init];
 			user.email = [myarg valueForKey :@"email" ];
 			user.code = [myarg valueForKey :@"code" ];
@@ -100,8 +124,8 @@
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-        
-        
+
+
     }
 
 - (void)forgetUser:(CDVInvokedUrlCommand*)command
@@ -116,16 +140,45 @@
 
 - (void)sendEvent:(CDVInvokedUrlCommand*)command
 {
+
+    CDVPluginResult* pluginResult = nil;
+    NSString* myarg = nil;
 	@try{
-    NSString* myarg = [command.arguments objectAtIndex:0];
-    //[payload setObject:latitude forKey:[myarg valueForKey :@"latitude" ]];
-    //[payload setObject:longitude forKey:@"longitude"];
+
+        myarg = [command.arguments objectAtIndex:0];
     }
 	@catch (NSException * e) {
 	    NSLog(@"Exception: %@", e);
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Arg was null"];
 	 }
+
+    //NSMutableDictionary* payload = [[NSMutableDictionary alloc] init];
+    NSString* event = [myarg valueForKey :@"event" ];
+    NSMutableDictionary* payloadTmp = [myarg valueForKey :@"payload" ];
+
+    [[NSR sharedInstance] sendEvent:event payload:payloadTmp];
+
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+}
+
+- (void)postMessage:(CDVInvokedUrlCommand*)command
+{
+
+    NSString* arg = [command.arguments objectAtIndex:0];
+    NSData* argData = [arg dataUsingEncoding:(NSUTF8StringEncoding)];
+    NSMutableDictionary* json = [NSJSONSerialization JSONObjectWithData:argData options:0 error:NULL];
+
+    NSString* val = [json valueForKey :@"what" ];
+    NSString* val1 = [json valueForKey :@"endpoint" ];
+
     NSMutableDictionary* payload = [[NSMutableDictionary alloc] init];
-    [[NSR sharedInstance] sendEvent:@"position" payload:payload];
+    [payload setObject:val forKey:@"what" ];
+    [payload setObject:val1 forKey:@"endpoint" ];
+
+
+    [[NSR sharedInstance] sendEvent:val payload:payload];
 }
 @end
 
