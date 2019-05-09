@@ -259,9 +259,9 @@ Or install from local source:
     
     ```js
     var params = {
-       "code":"bppb",
-       "base_url":"https://sandboxng.neosurancecloud.net/api/v1.0/",
-       "secret_key": "pass",
+       "code":"code",
+       "base_url":"https://base_url/api/v1.0/",
+       "secret_key": "secret_key",
        "dev_mode": true
     };
 
