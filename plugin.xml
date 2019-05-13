@@ -179,6 +179,11 @@
 		<header-file src="src/ios/NSRWebView.h" />
 		<source-file src="src/ios/NSRWebView.m" />
 
+		<header-file src="src/ios/NSRFenceCallback.h" />
+		<source-file src="src/ios/NSRFenceCallback.m" />
+		<header-file src="src/ios/NSRFences.h" />
+		<source-file src="src/ios/NSRFences.m" />
+
 		<source-file src="assets/config.properties" target-dir="assets" />
 		<source-file src="drawable/nsr_logo.png" target-dir="assets" />
 		<source-file src="raw/push.wav" target-dir="assets" />

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d8d1971-1a6a-40a4-ba92-6238d93f93ee" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugin.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,16 +19,16 @@
         <entry file="file://$PROJECT_DIR$/src/ios/NSRFences.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
-              <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+              <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ios/NSRFences.m">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -48,6 +47,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plugin.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="184" column="43" selection-start-line="184" selection-start-column="43" selection-end-line="184" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -162,12 +170,12 @@
         <option value="$PROJECT_DIR$/www/nsr.js" />
         <option value="$PROJECT_DIR$/src/ios/Neosurance.m" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/plugin.xml" />
         <option value="$PROJECT_DIR$/src/ios/NSR.h" />
         <option value="$PROJECT_DIR$/src/ios/NSRFences.h" />
         <option value="$PROJECT_DIR$/src/ios/NSRFences.m" />
         <option value="$PROJECT_DIR$/src/ios/NSRFenceCallback.h" />
         <option value="$PROJECT_DIR$/src/ios/NSRFenceCallback.m" />
+        <option value="$PROJECT_DIR$/plugin.xml" />
       </list>
     </option>
   </component>
@@ -292,12 +300,12 @@
       <workItem from="1556619017879" duration="17000" />
       <workItem from="1556801087199" duration="7795000" />
       <workItem from="1557128385133" duration="27444000" />
-      <workItem from="1557738351292" duration="2739000" />
+      <workItem from="1557738351292" duration="3090000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177258000" />
+    <option name="totallyTimeSpent" value="177609000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="23" width="1598" height="952" extended-state="0" />
@@ -501,13 +509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="141" column="65" lean-forward="true" selection-start-line="141" selection-start-column="65" selection-end-line="141" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/nsr.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-437">
@@ -584,7 +585,7 @@
     <entry file="file://$PROJECT_DIR$/src/ios/NSRFences.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
-          <caret line="7" column="29" lean-forward="true" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -621,7 +622,14 @@
     <entry file="file://$PROJECT_DIR$/src/ios/NSRFences.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="184" column="43" selection-start-line="184" selection-start-column="43" selection-end-line="184" selection-end-column="43" />
         </state>
       </provider>
     </entry>
