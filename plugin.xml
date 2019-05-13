@@ -139,6 +139,7 @@
 		<source-file src="src/android/utils/PackageChangeReceiver.java" target-dir="src/eu/neosurance/utils" />
 
 		<source-file src="assets/config.properties" target-dir="assets" />
+		<source-file src="assets/nsr.html" target-dir="assets" />
 
 		<source-file src="drawable/nsr_logo.png" target-dir="res/drawable" />
 		<source-file src="raw/push.wav" target-dir="res/raw" />
