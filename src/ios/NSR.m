@@ -6,7 +6,13 @@
 
 @implementation NSR
 
+static CLLocationCoordinate2D lastPoint;
+static NSString* lastStatus;
+
+static BOOL LMStartMonitoring = NO;
+static BOOL DwellRegion = NO;
 static BOOL _logDisabled = NO;
+
 +(BOOL)logDisabled {
     return _logDisabled;
 }
@@ -67,6 +73,7 @@ static BOOL _logDisabled = NO;
 -(void)continueInitJob {
     [self traceConnection];
     [self traceLocation];
+    [self traceFence];
     [self hardTraceLocation];
 }
 
@@ -108,12 +115,123 @@ static BOOL _logDisabled = NO;
 
 -(void)traceLocation {
     NSDictionary* conf = [self getConf];
-    if(conf != nil && [self getBoolean:conf[@"position"] key:@"enabled"]) {
+    //if(conf != nil && [self getBoolean:conf[@"position"] key:@"enabled"]) {
         [self initLocation];
         //[self.locationManager setDistanceFilter:500];
-        //[self.locationManager startUpdatingLocation];
+        [self.locationManager startUpdatingLocation];
         [self.locationManager startMonitoringSignificantLocationChanges];
+    //}
+}
+
+-(void)traceFence {
+    //via canova 12: 45.475843361854182,9.1684429052967111
+    //home: 45.47595366202188,9.168403077785003
+
+    if(self.fenceLocationManager == nil)
+        self.fenceLocationManager = [[CLLocationManager alloc] init];
+
+    self.fenceLocationManager.delegate = self;
+
+    if([self.fenceLocationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [self.fenceLocationManager requestAlwaysAuthorization];
+
+    [self.fenceLocationManager startUpdatingLocation];
+
+    [self buildFencesAndRegions];
+
+}
+
+-(void)buildFencesAndRegions{
+
+    NSArray* fencesArray = [self getFences];
+    self.regionsArray = [[NSMutableArray alloc] init];
+
+    //ALL FENCES
+    int countFen = [fencesArray count];
+    for (int i = 0; i < countFen; i++){
+        NSMutableDictionary* fenceTmp = [fencesArray objectAtIndex: i];
+        float lat = [[fenceTmp valueForKey:@"latitude"] floatValue];
+        float lon = [[fenceTmp valueForKey:@"longitude"] floatValue];
+        float radiusTmp = [[fenceTmp valueForKey:@"radius"] floatValue];
+        NSString* fenceID = [fenceTmp valueForKey:@"id"];
+        CLLocationCoordinate2D centerTmp = CLLocationCoordinate2DMake(lat,lon);
+        CLRegion* regionTmp=[[CLCircularRegion alloc] initCircularRegionWithCenter:centerTmp radius:radiusTmp identifier:fenceID];
+        regionTmp.notifyOnEntry = YES;
+        regionTmp.notifyOnExit=YES;
+        [self.regionsArray addObject:regionTmp];
+
+
+        NSLog (@"Fence [%i] = %@", i, [fencesArray objectAtIndex: i]);
+        NSLog (@"Region [%i] = %@", i, [self.regionsArray objectAtIndex: i]);
+
     }
+
+    NSData* myData = [NSKeyedArchiver archivedDataWithRootObject:self.regionsArray];
+    [[NSUserDefaults standardUserDefaults] setObject:myData forKey:@"clregions"];
+
+    [self startMonitoring];
+
+}
+-(void) startMonitoring{
+
+    self.regionsArray = [self getCLRegions];
+    int countReg = [self.regionsArray count];
+    for (int z = 0; z < countReg; z++){
+        NSLog (@"fenceLocationManager startMonitoringForRegion [%i] = %@", z, [self.regionsArray objectAtIndex: z]);
+        [self.fenceLocationManager startMonitoringForRegion:[self.regionsArray objectAtIndex: z]];
+    }
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
+    LMStartMonitoring = YES;
+    NSRLog(@"Fences >>> didStartMonitoringForRegion!");
+}
+
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region{
+    LMStartMonitoring = NO;
+    NSRLog(@"Fences >>> monitoringDidFailForRegion!");
+}
+
+- (void)didEnterRegionSelf:(CLRegion *)region :(NSMutableDictionary*) payload{
+    NSRLog(@"Fences >>> didEnterRegion  Self!");
+    [self crunchEvent:@"fence" payload:payload];
+}
+- (void)didExitRegionSelf:(CLRegion *)region :(NSMutableDictionary*) payload{
+    NSRLog(@"Fences >>> didExitRegion  Self!");
+    [self crunchEvent:@"fence" payload:payload];
+}
+
+- (void)didDwellRegionSelf:(CLRegion *)region :(NSMutableDictionary*) payload{
+    NSRLog(@"Fences >>> didDwellRegion  Self!");
+    [self crunchEvent:@"fence" payload:payload];
+    //[NSTimer scheduledTimerWithTimeInterval:20.0  target:self selector:@selector(actionTimer) userInfo:nil repeats:YES];
+}
+-(void)actionTimer{
+    if(DwellRegion)
+        DwellRegion = NO;
+}
+-(NSArray*)getFences{
+    NSArray* chains = [[NSUserDefaults standardUserDefaults] objectForKey:@"fences"];
+    return chains;
+}
+-(NSMutableArray*)getCLRegions{
+    NSData* clregionsData = [[NSUserDefaults standardUserDefaults] objectForKey:@"clregions"];
+    NSMutableArray* clregions = [NSKeyedUnarchiver unarchiveObjectWithData:clregionsData];
+    return clregions;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region{
+    NSRLog(@"Fences >>> didEnterRegion!");
+
+    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Fences" message:@"didEnterRegion!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    //[alert show];
+}
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    NSRLog(@"Fences >>> didExitRegion!");
+
+    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Fences" message:@"didExitRegion!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    //[alert show];
 }
 
 -(void)hardTraceLocation {
@@ -492,10 +610,10 @@ static BOOL _logDisabled = NO;
         [mutableSettings setObject:[NSNumber numberWithFloat:a] forKey:@"back_color_a"];
     }
     [self setSettings: mutableSettings];
-    if(!setupInited){
+    //if(!setupInited){
         setupInited = YES;
         [self initJob];
-    }
+    //}
 }
 
 -(void)registerUser:(NSRUser*) user {
@@ -1020,14 +1138,84 @@ static BOOL _logDisabled = NO;
     return rootViewController;
 }
 
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     @try {
         if(manager == self.stillLocationManager) {
             [manager stopUpdatingLocation];
         }
+
         [self opportunisticTrace];
         [self checkHardTraceLocation];
         CLLocation *newLocation = [locations lastObject];
+
+        if(manager == self.fenceLocationManager && LMStartMonitoring) {
+
+            self.regionsArray = [self getCLRegions];
+            int countReg = [self.regionsArray count];
+
+            for (int i = 0; i < countReg; i++){
+
+                CLRegion* regionTmp = [self.regionsArray objectAtIndex: i]; //identifier
+
+                NSString* regionId = [regionTmp identifier];
+
+                NSMutableString* strEnter = [[NSMutableString alloc] init];
+                [strEnter appendString:regionId];
+                [strEnter appendString:@" ENTER"];
+
+                NSMutableString* strExit = [[NSMutableString alloc] init];
+                [strExit appendString:regionId];
+                [strExit appendString:@" EXIT"];
+
+                NSMutableString* strDwell = [[NSMutableString alloc] init];
+                [strDwell appendString:regionId];
+                [strDwell appendString:@" DWELL"];
+
+                NSLog (@"Element %i = %@", i, regionTmp);
+
+                CLLocationCoordinate2D newPoint = CLLocationCoordinate2DMake(newLocation.coordinate.latitude,newLocation.coordinate.longitude);
+                NSString* newStatus = ([regionTmp containsCoordinate:newPoint]) ? @"inside" : @"outside";
+
+                if(lastStatus != newStatus){
+                    lastStatus = newStatus;
+
+                    NSMutableDictionary* payload = [[NSMutableDictionary alloc] init];
+                    [payload setObject:[NSNumber numberWithFloat:newLocation.coordinate.latitude] forKey:@"latitude"];
+                    [payload setObject:[NSNumber numberWithFloat:newLocation.coordinate.longitude] forKey:@"longitude"];
+                    [payload setObject:[NSNumber numberWithFloat:newLocation.altitude] forKey:@"altitude"];
+
+
+                    if([regionTmp containsCoordinate:newPoint]){
+                        lastStatus = @"inside";
+                        [payload setObject:strEnter forKey:@"id"];
+                        [payload setObject:@"enter" forKey:@"fence"];
+
+                        [self didEnterRegionSelf:regionTmp:payload];
+                    }else{
+                        lastStatus = @"outside";
+                        DwellRegion = NO;
+                        [payload setObject:strExit  forKey:@"id"];
+                        [payload setObject:@"exit" forKey:@"fence"];
+
+                        [self didExitRegionSelf:regionTmp:payload];
+                    }
+
+                }else if(!DwellRegion && [lastStatus isEqualToString:@"inside"]){
+                    DwellRegion = YES;
+                    NSMutableDictionary* payload = [[NSMutableDictionary alloc] init];
+                    [payload setObject:[NSNumber numberWithFloat:newLocation.coordinate.latitude] forKey:@"latitude"];
+                    [payload setObject:[NSNumber numberWithFloat:newLocation.coordinate.longitude] forKey:@"longitude"];
+                    [payload setObject:[NSNumber numberWithFloat:newLocation.altitude] forKey:@"altitude"];
+                    [payload setObject:@"dwell" forKey:@"fence"];
+                    [payload setObject:strDwell forKey:@"id"];
+
+                    [self didDwellRegionSelf:regionTmp:payload];
+                }
+
+            }//*** END FOR
+        }
+
         NSRLog(@"enter didUpdateToLocation");
         NSDictionary* conf = [self getConf];
         if(conf != nil && [self getBoolean:conf[@"position"] key:@"enabled"]) {
@@ -1038,12 +1226,14 @@ static BOOL _logDisabled = NO;
             [self crunchEvent:@"position" payload:payload];
             stillLocationSent = (manager == self.stillLocationManager);
         }
+
         NSRLog(@"didUpdateToLocation exit");
     }
     @catch (NSException *exception) {
         NSRLog(@"didUpdateToLocation error");
     }
 }
+
 
 - (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSRLog(@"didFailWithError");

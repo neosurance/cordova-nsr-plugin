@@ -8,6 +8,7 @@
 #import "NSRControllerWebView.h"
 #import "NSRUser.h"
 
+
 #define NSRLog if(![NSR logDisabled]) NSLog
 
 @protocol NSRSecurityDelegate<NSObject>
@@ -29,15 +30,20 @@
 @property(nonatomic, strong) CLLocationManager* locationManager;
 @property(nonatomic, strong) CLLocationManager* hardLocationManager;
 @property(nonatomic, strong) CLLocationManager* stillLocationManager;
+
+@property(nonatomic, strong) CLLocationManager* fenceLocationManager;
+
 @property(nonatomic, strong) CMMotionActivityManager* motionActivityManager;
 @property(nonatomic, strong) id <NSRSecurityDelegate> securityDelegate;
 @property(nonatomic, strong) id <NSRWorkflowDelegate> workflowDelegate;
 @property(nonatomic, strong) NSMutableArray* motionActivities;
+@property(nonatomic, strong) NSMutableArray* regionsArray;
 
 -(BOOL)getBoolean:(NSDictionary*)dict key:(NSString*)key;
 +(BOOL)logDisabled;
 +(id)sharedInstance;
 -(void)setup:(NSDictionary*)settings;
+-(void)traceFence;
 -(void)forgetUser;
 -(NSString*)version;
 -(NSString*)os;
@@ -61,6 +67,9 @@
 -(void)loginExecuted:(NSString*) url;
 -(void)paymentExecuted:(NSDictionary*) paymentInfo url:(NSString*) url;
 
+- (void)didEnterRegionSelf:(CLRegion *)region :(NSMutableDictionary*) payload;
+- (void)didExitRegionSelf:(CLRegion *)region :(NSMutableDictionary*) payload;
+
 -(NSDictionary*)getSettings;
 -(NSString*)getLang;
 -(NSDictionary*)getConf;
@@ -78,5 +87,6 @@
 -(void)resetCruncher;
 
 -(void)continueInitJob;
+
 
 @end
