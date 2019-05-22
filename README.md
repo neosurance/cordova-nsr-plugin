@@ -222,10 +222,9 @@ Or install from local source:
 2. Inside your Podfile be sure to have the following:
 
 	```
-	platform :ios, '9.0'
-	use_frameworks!
+	target 'NSRIonic_v4TEST' do
 	source 'https://github.com/CocoaPods/Specs.git'
-	target 'YOUR_APP_NAME' do
+	platform :ios, '9.0'
 	pod 'AFNetworking', '~> 3.0'
 	end
 	```
