@@ -178,7 +178,7 @@
 		<source-file src="src/ios/NSRUser.m" />
 		<header-file src="src/ios/NSRWebView.h" />
 		<source-file src="src/ios/NSRWebView.m" />
-		<source-file src="assets/eventCruncher.html" />
+		<source-file src="assets/eventCruncher.html" target-dir="Plugins"/>
 
 		<source-file src="assets/config.properties" target-dir="assets" />
 		
