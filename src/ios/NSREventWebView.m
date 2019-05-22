@@ -10,12 +10,12 @@
 		[self.webConfiguration.userContentController addScriptMessageHandler:self name:@"app"];
 		self.webView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:self.webConfiguration];
 		NSURL* rurl = [[nsr frameworkBundle] URLForResource:@"eventCruncher" withExtension:@"html"];
-
-
+        
+        
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eventCruncher" ofType:@"html"]isDirectory:NO]]];
 
-
-
+        
+        
 		//NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?ns_lang=%@&ns_log=%@", rurl ,[nsr getLang],[NSR logDisabled]?@"false":@"true"]];
 		//[self.webView loadRequest:[[NSURLRequest alloc] initWithURL:url]];
 	}
@@ -49,7 +49,7 @@
 			[nsr killPush:body[@"killPush"]];
 		}
 		if(body[@"what"] != nil) {
-
+            
 			if([@"continueInitJob" isEqualToString:body[@"what"]]) {
 				[nsr continueInitJob];
 			}
