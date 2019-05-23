@@ -179,11 +179,10 @@
 		<header-file src="src/ios/NSRWebView.h" />
 		<source-file src="src/ios/NSRWebView.m" />
 		
-		<source-file src="assets/eventCruncher.html" target-dir="../"/>
-		<source-file src="assets/nsr.html" target-dir="../" />
-		<source-file src="assets/config.properties" target-dir="../" />
-		<source-file src="drawable/nsr_logo.png" target-dir="../" />
-		<source-file src="raw/push.wav" target-dir="../" />
+		<source-file src="assets/eventCruncher.html"/>
+		<source-file src="assets/config.properties" target-dir="assets" />
+		<source-file src="drawable/nsr_logo.png" target-dir="assets" />
+		<source-file src="raw/push.wav" target-dir="assets" />
 
 	</platform>
 
