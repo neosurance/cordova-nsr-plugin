@@ -222,9 +222,10 @@ Or install from local source:
 2. Inside your Podfile be sure to have the following:
 
 	```
-	target 'NSRIonic_v4TEST' do
-	source 'https://github.com/CocoaPods/Specs.git'
 	platform :ios, '9.0'
+	use_frameworks!
+	source 'https://github.com/CocoaPods/Specs.git'
+	target 'appName' do
 	pod 'AFNetworking', '~> 3.0'
 	end
 	```
@@ -243,6 +244,14 @@ Or install from local source:
     - Remote notifications
 	```
 
+4. Right Click on eventCruncher.html:
+
+	```
+	- Delete -> Remove Reference
+	- Add Files to “appname”…
+	(check "Copy items if needed","Crete Groups" and "Add to Targets")
+	- Click on Add Button
+	```
 ## Usage
 
 1. ### Setup
