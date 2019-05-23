@@ -39,7 +39,7 @@ public class NSREventWebView {
 					webView.getSettings().setAllowFileAccessFromFileURLs(true);
 					webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 					webView.getSettings().setDomStorageEnabled(true);
-					//webView.loadUrl("file:///android_asset/eventCruncher.html?ns_lang=IT" + /* NSRUtils.getLang(ctx) + */ "&ns_log=" + NSRUtils.isLogEnabled(ctx));
+					webView.loadUrl("file:///android_asset/nsr.html?ns_lang=IT" + /* NSRUtils.getLang(ctx) + */ "&ns_log=" + NSRUtils.isLogEnabled(ctx));
 				}
 			});
 
@@ -49,11 +49,11 @@ public class NSREventWebView {
 	}
 
 	public void synch() {
-		eval("nsr_event_cruncher.EVC.synch()");
+		eval("EVC.synch()");
 	}
 
 	public void reset() {
-		eval("localStorage.clear();nsr_event_cruncher.EVC.synch()");
+		eval("localStorage.clear();EVC.synch()");
 	}
 
 	protected void crunchEvent(final String event, final JSONObject payload) {
@@ -61,7 +61,7 @@ public class NSREventWebView {
 			JSONObject nsrEvent = new JSONObject();
 			nsrEvent.put("event", event);
 			nsrEvent.put("payload", payload);
-			eval("nsr_event_cruncher.EVC.innerCrunchEvent(" + nsrEvent.toString() + ")");
+			eval("EVC.innerCrunchEvent(" + nsrEvent.toString() + ")");
 		} catch (JSONException e) {
 			NSRLog.e("crunchEvent", e);
 		}
