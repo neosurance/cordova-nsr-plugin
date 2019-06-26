@@ -218,23 +218,8 @@ Or install from local source:
     - Privacy - Location When In Use Usage Description				[When in use...]
     - Privacy - Motion Usage Description							[Motion…]
 	```
-	
-2. Inside your Podfile be sure to have the following:
 
-	```
-	platform :ios, '9.0'
-	use_frameworks!
-	source 'https://github.com/CocoaPods/Specs.git'
-	target 'appName' do
-	pod 'AFNetworking', '~> 3.0'
-	end
-	```
-	then use this command from your terminal in the Podfile and Xcode project directory:
-	```
-    pod install
-    ```
-
-3. Inside your XCode Capabilities be sure to have the following:
+2. Inside your XCode Capabilities be sure to have the following:
 
 	```xml
 	Background Modes ON
@@ -244,7 +229,7 @@ Or install from local source:
     - Remote notifications
 	```
 
-4. Right Click on eventCruncher.html:
+3. Right Click on eventCruncher.html:
 
 	```
 	- Delete -> Remove Reference
