@@ -1,4 +1,6 @@
 #import <math.h>
+#import <UIKit/UIKit.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
 #import "NSR.h"
 #import "NSRDefaultSecurityDelegate.h"
 #import "NSRControllerWebView.h"
@@ -1267,6 +1269,28 @@ static BOOL _logDisabled = NO;
                 
             }//*** END FOR
         }
+		
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        
+        
+        NSString* appStatus = nil;
+        if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
+            appStatus = @"background";
+        } else if (state == UIApplicationStateActive) {
+            appStatus = @"foreground";
+        }
+        NSLog(@"appStatus: %@", appStatus);
+        
+    
+        NSArray *interFaceNames = (__bridge_transfer id)CNCopySupportedInterfaces();
+        NSString* ssid = nil;
+        for (NSString *name in interFaceNames) {
+          NSDictionary *info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)name);
+
+          NSLog(@"wifi info: bssid: %@, ssid:%@, ssidData: %@", info[@"BSSID"], info[@"SSID"], info[@"SSIDDATA"]);
+          ssid = info[@"SSID"];
+        }
+		
         
         NSRLog(@"enter didUpdateToLocation");
         NSDictionary* conf = [self getConf];
@@ -1275,6 +1299,9 @@ static BOOL _logDisabled = NO;
             [payload setObject:[NSNumber numberWithFloat:newLocation.coordinate.latitude] forKey:@"latitude"];
             [payload setObject:[NSNumber numberWithFloat:newLocation.coordinate.longitude] forKey:@"longitude"];
             [payload setObject:[NSNumber numberWithFloat:newLocation.altitude] forKey:@"altitude"];
+            if(ssid != nil)
+                [payload setObject:ssid forKey:@"ssid"];
+            [payload setObject:appStatus forKey:@"appstatus"];
             [self crunchEvent:@"position" payload:payload];
             stillLocationSent = (manager == self.stillLocationManager);
         }
