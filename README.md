@@ -220,6 +220,7 @@ Or install from local source:
     - Privacy - Location Always Usage Description					[Always...]
     - Privacy - Location When In Use Usage Description				[When in use...]
     - Privacy - Motion Usage Description							[Motion…]
+	- Privacy - Camera Usage Description							[For claim...]
 	```
 
 2. Inside your XCode Capabilities be sure to have the following:
