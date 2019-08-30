@@ -3,7 +3,7 @@
 		xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		id="cordova-nsr-plugin"
-		version="1.0.18">
+		version="1.0.19">
 
     <name>Neosurance</name>
 
@@ -181,6 +181,8 @@
 		<source-file src="src/ios/NSRUser.m" />
 		<header-file src="src/ios/NSRWebView.h" />
 		<source-file src="src/ios/NSRWebView.m" />
+		<source-file src="src/ios/Reachability.h" />
+		<source-file src="src/ios/Reachability.m" />
 		
 		<source-file src="assets/eventCruncher.html"/>
 		<source-file src="assets/config.properties" target-dir="assets" />
