@@ -166,11 +166,11 @@ Or install from local source:
 	
 	```
 	android {
-        compileSdkVersion 28
+        compileSdkVersion 29
     
         defaultConfig {
-            minSdkVersion 19
-            targetSdkVersion 28
+            minSdkVersion 21
+            targetSdkVersion 29
             versionCode 3
             versionName "3.0.0"
             multiDexEnabled true
