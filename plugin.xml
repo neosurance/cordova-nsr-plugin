@@ -3,7 +3,7 @@
 		xmlns="http://cordova.apache.org/ns/plugins/1.0"
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		id="cordova-nsr-plugin"
-		version="1.0.16">
+		version="1.0.17">
 
     <name>Neosurance</name>
 
@@ -43,7 +43,7 @@
     <platform name="android">
 
 		<edit-config file="AndroidManifest.xml" target="/manifest/uses-sdk" mode="merge">
-			<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="27" />
+			<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
 		</edit-config>
 
 		<config-file target="res/xml/config.xml" parent="/*">
