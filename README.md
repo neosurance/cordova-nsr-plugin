@@ -169,10 +169,10 @@ Or install from local source:
         compileSdkVersion 29
     
         defaultConfig {
-            minSdkVersion 21
+            minSdkVersion 23
             targetSdkVersion 29
-            versionCode 3
-            versionName "3.0.0"
+            versionCode 1
+            versionName "1.0.0"
             multiDexEnabled true
         }
     }
