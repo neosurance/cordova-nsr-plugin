@@ -1,6 +1,6 @@
 {
   "name": "cordova-nsr-plugin",
-  "version": "3.0.22",
+  "version": "3.0.23",
   "description": "NSR Cordova interface",
   "cordova": {
     "id": "cordova-nsr-plugin",
